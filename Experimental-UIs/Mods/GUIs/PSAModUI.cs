@@ -32,7 +32,7 @@ public static class PSAModUI
         GUILayout.Space(10f);
         if (GUILayout.Button("Close", Buttonss))
         {
-            Open = !Open;
+            PSAOpen = !PSAOpen;
         }
         GUI.DragWindow();
     }
