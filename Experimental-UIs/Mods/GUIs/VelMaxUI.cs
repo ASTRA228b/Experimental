@@ -57,7 +57,7 @@ public static class VelMaxUI
             GUILayout.Width(200)
         );
         OpenDropdown = OldIndex != InputSelectors.VSelectedIndex;
-        GUILayout.Label($"Current input: {InputSelectors.InputNames[InputSelectors.VSelectedIndex]}");
+        GUILayout.Label($"Current input: {InputSelectors.VInputNames[InputSelectors.VSelectedIndex]}");
         GUILayout.Label("Presets:");
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Reset", Buttonss))
