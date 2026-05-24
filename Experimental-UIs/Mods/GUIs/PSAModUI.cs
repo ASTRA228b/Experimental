@@ -43,7 +43,7 @@ public static class PSAModUI
         PSAEnabled = GUILayout.Toggle(PSAEnabled, "Enable PSA");
         GUILayout.Space(5f);
         Speedd = GUILayout.HorizontalSlider(Speedd, 1f, 12f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"Speed {Speed:F1}");
+        GUILayout.Label($"Speed {Speedd:F1}");
         MexGroundDis = GUILayout.HorizontalSlider(MexGroundDis, 0.1f, 2f, SliderStyle, SliderThumbStyle);
         GUILayout.Label($"Ground Dist: {MexGroundDis:F2}");
         GUILayout.Space(5f);
