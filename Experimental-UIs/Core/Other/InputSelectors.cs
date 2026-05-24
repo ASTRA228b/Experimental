@@ -96,7 +96,9 @@ public static class InputSelectors
     public static Func<bool>[] UseWalkInputs =
     {
       () => InputLib.LeftTrigger && InputLib.RightTrigger,
-      () => InputLib.LeftGrab && InputLib.RightGrab
+      () => InputLib.LeftGrab && InputLib.RightGrab,
+      () => InputLib.LeftJoystickClick && InputLib.RightJoystickClick,
+      () => (InputLib.LeftControllerXButton || InputLib.LeftControllerYButton) && (InputLib.RightControllerBButton || InputLib.RightControllerAButton)
     };
 
     public static int UseWalkIndex = 0;
