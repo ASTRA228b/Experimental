@@ -14,9 +14,9 @@ internal class InputLib
     // B 
     public static bool RightControllerBButton => ControllerInputPoller.instance.rightControllerSecondaryButton;
     // Y 
-    public static bool LeftControllerYButton => ControllerInputPoller.instance.leftControllerPrimaryButton;
+    public static bool LeftControllerYButton => ControllerInputPoller.instance.leftControllerSecondaryButton;
     // X
-    public static bool LeftControllerXButton => ControllerInputPoller.instance.leftControllerSecondaryButton;
+    public static bool LeftControllerXButton => ControllerInputPoller.instance.leftControllerPrimaryButton;
     // Note: on the htc vive wands both L/R The one button counts for both SecondaryButtons and PrimaryButtons
     // Joystick Stuff
     public static bool RightJoystickClick

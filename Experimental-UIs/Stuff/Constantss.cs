@@ -7,4 +7,6 @@ internal class Constantss
     public const string Version = "0.0.3";
     public const string ObjectName = "Experimental.UIS";
     public const string INFORMATION = "Made by Astra";
+
+    public const string ManagerObjectConst = "Astras.Mods.Experimental.SystemManager";
 }

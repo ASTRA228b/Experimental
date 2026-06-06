@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using BepInEx;
 using Experimental.Core;
-using Experimental.Stuff.Pathces;
 using Experimental.Stuff;
-using Experimental.Core.Libraries;
+using Experimental.Mods.Controllers.ControllerManagers;
 
 namespace Experimental.Plugin;
 
@@ -17,10 +16,9 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
-        GameObject Plugin = new GameObject(Constantss.ObjectName);
+        GameObject Plugin = new(Constantss.ObjectName);
         Plugin.AddComponent<Main>();
-        // Plugin.AddComponent<OnScreenNotify>(); // maybe adding back never used 
-        // Plugin.AddComponent<JoinManager>(); // stopped loading it was buggy
+        Plugin.AddComponent<ControllorSystemManager>();
         DontDestroyOnLoad(Plugin);
     }
 }

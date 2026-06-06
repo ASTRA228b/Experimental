@@ -104,4 +104,45 @@ public static class InputSelectors
     public static int UseWalkIndex = 0;
 
     public static bool UseWalkPressed => UseWalkInputs[UseWalkIndex]?.Invoke() ?? false;
+
+    // ATurnMod
+    public static string[] ATLInputNames =
+   {
+        "X",
+        "Y",
+        "Left Grab",
+        "Left Trigger"
+    };
+
+    public static Func<bool>[] ATLInputs =
+    {
+        () => InputLib.LeftControllerXButton,
+        () => InputLib.LeftControllerYButton,
+        () => InputLib.LeftGrab,
+        () => InputLib.LeftTrigger
+    };
+
+    public static int ATLSelectedIndex = 0;
+
+    public static bool ATLPressed => ATLInputs[ATLSelectedIndex]?.Invoke() ?? false;
+
+    public static string[] ATRInputNames =
+    {
+        "A",
+        "B",
+        "Right Grab",
+        "Right Trigger"
+    };
+
+    public static Func<bool>[] ATRInputs =
+    {
+        () => InputLib.RightControllerAButton,
+        () => InputLib.RightControllerBButton,
+        () => InputLib.RightGrab,
+        () => InputLib.RightTrigger
+    };
+
+    public static int ATRSelectedIndex = 0;
+
+    public static bool ATRPressed => ATRInputs[ATRSelectedIndex]?.Invoke() ?? true;
 }

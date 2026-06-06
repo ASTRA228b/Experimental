@@ -93,4 +93,24 @@ public static class GlobalVars
     public static string GTIMEName = "E - Gorilla TimeV2";
     public static bool GTVOpen = false;
     public static int GTVID = 5678943;
+    // ATurnMod
+
+    // mod bs
+    public static float TurnSpeed = 0f;
+    public static float Smoothnes = 0f;
+    public static float SnapAngle = 0f;
+    public static float TV = 0f;
+    public static bool ST = false;
+    public static bool TM = false;
+    // press bs
+    public static bool LP = false;
+    public static bool RP = false;
+    // gui bs
+    public static Rect ATurnModWindow = new(155, 155, 360, 460);
+    public static bool ATurnWindowOpen = false;
+    public static bool ATDropDownOpen = false;
+    public static int ATurnModTabInt = 0;
+    public static string[] ATurnModTabs = { "Main", "Input Settings" };
+    public static string ATrunModGUIName = "Astras TurnMod";
+    public static int ATrunModWindowInt = 67123456;
 }

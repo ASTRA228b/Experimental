@@ -38,6 +38,7 @@ public class Main : MonoBehaviour
         PSAModUI.MakePSAModUI();
         VelMaxUI.MakeVelMaxUI();
         WallWalkUI.MakeWalkerUI();
+        ATurnModGUI.MakeATurnModGUI();
     }
 
     private void Update()
@@ -102,6 +103,10 @@ public class Main : MonoBehaviour
         GlobalVars.PSAOpen = GUILayout.Toggle(GlobalVars.PSAOpen, "Astras PSA Mod");
         GlobalVars.VOpen = GUILayout.Toggle(GlobalVars.VOpen, "Astras VelMax Mod");
         GlobalVars.WalkOpen = GUILayout.Toggle(GlobalVars.WalkOpen, "AWallWalk V2");
+        GUILayout.EndHorizontal();
+        GUILayout.Space(2f);
+        GUILayout.BeginHorizontal();
+        GlobalVars.ATurnWindowOpen = GUILayout.Toggle(GlobalVars.ATurnWindowOpen, "Astras TurnMod");
         GUILayout.EndHorizontal();
     }
 
