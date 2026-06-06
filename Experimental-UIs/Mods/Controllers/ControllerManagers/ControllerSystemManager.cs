@@ -4,7 +4,7 @@ using Experimental.Mods.Controllers;
 
 namespace Experimental.Mods.Controllers.ControllerManagers;
 
-public class ControllorSystemManager : MonoBehaviour
+public class ControllerSystemManager : MonoBehaviour
 {
     private GameObject? ModSystemManagers;
 

@@ -18,7 +18,7 @@ public class Plugin : BaseUnityPlugin
     {
         GameObject Plugin = new(Constantss.ObjectName);
         Plugin.AddComponent<Main>();
-        Plugin.AddComponent<ControllorSystemManager>();
+        Plugin.AddComponent<ControllerSystemManager>();
         DontDestroyOnLoad(Plugin);
     }
 }
