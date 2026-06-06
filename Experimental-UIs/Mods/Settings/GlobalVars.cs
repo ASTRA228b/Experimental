@@ -111,6 +111,6 @@ public static class GlobalVars
     public static bool ATDropDownOpen = false;
     public static int ATurnModTabInt = 0;
     public static string[] ATurnModTabs = { "Main", "Input Settings" };
-    public static string ATrunModGUIName = "Astras TurnMod";
+    public static string ATrunModGUIName = "E - Astras TurnMod";
     public static int ATrunModWindowInt = 67123456;
 }
