@@ -3,6 +3,7 @@ using BepInEx;
 using Experimental.Core;
 using Experimental.Stuff;
 using Experimental.Mods.Controllers.ControllerManagers;
+using Experimental.Core.IntroManager;
 
 namespace Experimental.Plugin;
 
@@ -19,6 +20,7 @@ public class Plugin : BaseUnityPlugin
         GameObject Plugin = new(Constantss.ObjectName);
         Plugin.AddComponent<Main>();
         Plugin.AddComponent<ControllerSystemManager>();
+        Plugin.AddComponent<IntroPlayer>();
         DontDestroyOnLoad(Plugin);
     }
 }
