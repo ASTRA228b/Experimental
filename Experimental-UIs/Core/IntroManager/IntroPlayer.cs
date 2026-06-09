@@ -2,6 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Video;
+using System.IO;
 
 namespace Experimental.Core.IntroManager;
 
@@ -9,10 +10,12 @@ public class IntroPlayer : MonoBehaviour
 {
     private VideoPlayer? ExperimentalPlayer;
     private RenderTexture? ExperimentalRender;
-    private bool Playin;
+
+    private bool readyToShow;
+    private bool videoReady;
     private bool finished;
+
     private float delayTimer = 45f;
-    private bool readyToShow = false;
 
     private void Start()
     {
@@ -23,7 +26,7 @@ public class IntroPlayer : MonoBehaviour
 
         ExperimentalPlayer = Video.AddComponent<VideoPlayer>();
 
-        ExperimentalRender = new(1920, 1080, 0);
+        ExperimentalRender = new RenderTexture(1920, 1080, 0);
 
         ExperimentalPlayer.renderMode = VideoRenderMode.RenderTexture;
         ExperimentalPlayer.targetTexture = ExperimentalRender;
@@ -32,25 +35,10 @@ public class IntroPlayer : MonoBehaviour
         ExperimentalPlayer.playOnAwake = false;
         ExperimentalPlayer.isLooping = false;
         ExperimentalPlayer.waitForFirstFrame = true;
+
+        ExperimentalPlayer.audioOutputMode = VideoAudioOutputMode.None;
     }
 
-    private string PullFileFromDLL()
-    {
-        Assembly ExperimentalASM = Assembly.GetExecutingAssembly();
-        string RCSName = "Experimental.RCS.Experimental.mp4";
-        using Stream STD = ExperimentalASM.GetManifestResourceStream(RCSName);
-        if (STD == null)
-        {
-            Debug.LogError($"[{Constantss.GUID}]: Embedded Video Not Found");
-            return "";
-        }
-
-        string InternalPath = Path.Combine(Application.persistentDataPath, "Experimental.mp4");
-        using FileStream EFile = new(InternalPath, FileMode.Create, FileAccess.Write);
-        STD.CopyTo(EFile);
-
-        return InternalPath;
-    }
     private void Update()
     {
         if (finished) return;
@@ -62,21 +50,44 @@ public class IntroPlayer : MonoBehaviour
             if (delayTimer <= 0f)
             {
                 readyToShow = true;
+
                 if (ExperimentalPlayer == null) return;
-                ExperimentalPlayer.Prepare();
 
                 ExperimentalPlayer.prepareCompleted += vp =>
                 {
                     vp.Play();
-                    Playin = true;
+                    videoReady = true;
                 };
+
+                ExperimentalPlayer.Prepare();
             }
         }
     }
 
+    private string PullFileFromDLL()
+    {
+        Assembly ExperimentalASM = Assembly.GetExecutingAssembly();
+        string RCSName = "Experimental.RCS.Experimental.mp4";
+
+        using Stream STD = ExperimentalASM.GetManifestResourceStream(RCSName);
+
+        if (STD == null)
+        {
+            Debug.LogError($"[{Constantss.GUID}]: Embedded Video Not Found");
+            return "";
+        }
+
+        string InternalPath = Path.Combine(Application.persistentDataPath, "Experimental.mp4");
+
+        using FileStream EFile = new(InternalPath, FileMode.Create, FileAccess.Write);
+        STD.CopyTo(EFile);
+
+        return InternalPath;
+    }
+
     private void OnGUI()
     {
-        if (finished || !readyToShow || ExperimentalRender == null || !Playin)
+        if (finished || !readyToShow || !videoReady || ExperimentalRender == null)
             return;
 
         GUI.DrawTexture(
@@ -90,5 +101,4 @@ public class IntroPlayer : MonoBehaviour
             ScaleMode.ScaleToFit
         );
     }
-
 }
