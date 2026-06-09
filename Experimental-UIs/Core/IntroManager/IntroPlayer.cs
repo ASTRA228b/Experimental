@@ -49,7 +49,7 @@ public class IntroPlayer : MonoBehaviour
             if (ExperimentalPlayer == null) return;
 
             ExperimentalPlayer.Prepare();
-            ExperimentalPlayer.Play(); // 🔥 FORCE PLAY (THIS IS THE FIX)
+            ExperimentalPlayer.Play(); 
         }
     }
 
