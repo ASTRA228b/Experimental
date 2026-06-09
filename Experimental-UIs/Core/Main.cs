@@ -39,6 +39,7 @@ public class Main : MonoBehaviour
         VelMaxUI.MakeVelMaxUI();
         WallWalkUI.MakeWalkerUI();
         ATurnModGUI.MakeATurnModGUI();
+        APitGeoModUI.MakePitGeoUI();
     }
 
     private void Update()
@@ -107,6 +108,7 @@ public class Main : MonoBehaviour
         GUILayout.Space(2f);
         GUILayout.BeginHorizontal();
         GlobalVars.ATurnWindowOpen = GUILayout.Toggle(GlobalVars.ATurnWindowOpen, "Astras TurnMod");
+        GlobalVars.PitGeoGUIOpen = GUILayout.Toggle(GlobalVars.PitGeoGUIOpen, "Astras PitGeo GUI");
         GUILayout.EndHorizontal();
     }
 

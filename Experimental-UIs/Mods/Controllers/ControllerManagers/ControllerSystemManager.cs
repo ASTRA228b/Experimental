@@ -14,7 +14,7 @@ public class ControllerSystemManager : MonoBehaviour
     {
         ModSystemManagers = new(Constantss.ManagerObjectConst);
         ModSystemManagers.AddComponent<ATurnModController>();
-        // ModSystemManagers.AddComponent<>();
+        ModSystemManagers.AddComponent<PitGeoManager>();
         DontDestroyOnLoad(ModSystemManagers);
     }
 }
