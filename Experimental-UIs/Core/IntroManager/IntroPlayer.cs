@@ -11,11 +11,8 @@ public class IntroPlayer : MonoBehaviour
     private VideoPlayer? ExperimentalPlayer;
     private RenderTexture? ExperimentalRender;
 
-    private bool readyToShow;
-    private bool videoReady;
-    private bool finished;
-
     private float delayTimer = 45f;
+    private bool started;
 
     private void Start()
     {
@@ -41,28 +38,36 @@ public class IntroPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (finished) return;
+        if (started) return;
 
-        if (!readyToShow)
+        delayTimer -= Time.deltaTime;
+
+        if (delayTimer <= 0f)
         {
-            delayTimer -= Time.deltaTime;
+            started = true;
 
-            if (delayTimer <= 0f)
-            {
-                readyToShow = true;
+            if (ExperimentalPlayer == null) return;
 
-                if (ExperimentalPlayer == null) return;
-
-                ExperimentalPlayer.prepareCompleted += vp =>
-                {
-                    vp.Play();
-                    videoReady = true;
-                };
-
-                ExperimentalPlayer.Prepare();
-                ExperimentalPlayer.Play();
-            }
+            ExperimentalPlayer.Prepare();
+            ExperimentalPlayer.Play(); // 🔥 FORCE PLAY (THIS IS THE FIX)
         }
+    }
+
+    private void OnGUI()
+    {
+        if (!started || ExperimentalRender == null)
+            return;
+
+        GUI.DrawTexture(
+            new Rect(0, 0, Screen.width, Screen.height),
+            Texture2D.blackTexture
+        );
+
+        GUI.DrawTexture(
+            new Rect(0, 0, Screen.width, Screen.height),
+            ExperimentalRender,
+            ScaleMode.ScaleToFit
+        );
     }
 
     private string PullFileFromDLL()
@@ -84,22 +89,5 @@ public class IntroPlayer : MonoBehaviour
         STD.CopyTo(EFile);
 
         return InternalPath;
-    }
-
-    private void OnGUI()
-    {
-        if (finished || !readyToShow || !videoReady || ExperimentalRender == null)
-            return;
-
-        GUI.DrawTexture(
-            new Rect(0, 0, Screen.width, Screen.height),
-            Texture2D.blackTexture
-        );
-
-        GUI.DrawTexture(
-            new Rect(0, 0, Screen.width, Screen.height),
-            ExperimentalRender,
-            ScaleMode.ScaleToFit
-        );
     }
 }
