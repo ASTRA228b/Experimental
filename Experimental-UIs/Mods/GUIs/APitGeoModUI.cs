@@ -23,7 +23,7 @@ public static class APitGeoModUI
         GUILayout.Space(10f);
         if (GUILayout.Button("Close", Buttonss))
         {
-            Open = !Open;
+            PitGeoGUIOpen = !PitGeoGUIOpen;
         }
         GUI.DragWindow();
     }
