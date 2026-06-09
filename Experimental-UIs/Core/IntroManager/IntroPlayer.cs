@@ -17,7 +17,7 @@ public class IntroPlayer : MonoBehaviour
         string TempPath = PullFileFromDLL();
         GameObject Video = new("StartupVideo");
         DontDestroyOnLoad(Video);
-        ExperimentalPlayer = Video.GetComponent<VideoPlayer>();
+        ExperimentalPlayer = Video.AddComponent<VideoPlayer>();
         ExperimentalRender = new(1920, 1080, 0);
         ExperimentalPlayer.renderMode = VideoRenderMode.RenderTexture;
         ExperimentalPlayer.targetTexture = ExperimentalRender;
