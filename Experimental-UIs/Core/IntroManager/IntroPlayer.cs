@@ -23,7 +23,7 @@ public class IntroPlayer : MonoBehaviour
 
         ExperimentalPlayer = Video.AddComponent<VideoPlayer>();
 
-        ExperimentalRender = new RenderTexture(1920, 1080, 0);
+        ExperimentalRender = new(1920, 1080, 0);
 
         ExperimentalPlayer.renderMode = VideoRenderMode.RenderTexture;
         ExperimentalPlayer.targetTexture = ExperimentalRender;
@@ -34,6 +34,9 @@ public class IntroPlayer : MonoBehaviour
         ExperimentalPlayer.waitForFirstFrame = true;
 
         ExperimentalPlayer.audioOutputMode = VideoAudioOutputMode.None;
+
+ 
+        ExperimentalPlayer.loopPointReached += OnVideoEnd;
     }
 
     private void Update()
@@ -49,7 +52,7 @@ public class IntroPlayer : MonoBehaviour
             if (ExperimentalPlayer == null) return;
 
             ExperimentalPlayer.Prepare();
-            ExperimentalPlayer.Play(); 
+            ExperimentalPlayer.Play();
         }
     }
 
@@ -68,6 +71,17 @@ public class IntroPlayer : MonoBehaviour
             ExperimentalRender,
             ScaleMode.ScaleToFit
         );
+    }
+
+ 
+    private void OnVideoEnd(VideoPlayer vp)
+    {
+        if (vp != null)
+        {
+            Destroy(vp.gameObject);
+        }
+
+      
     }
 
     private string PullFileFromDLL()
