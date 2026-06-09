@@ -11,6 +11,8 @@ public class IntroPlayer : MonoBehaviour
     private RenderTexture? ExperimentalRender;
     private bool Playin;
     private bool finished;
+    private float delayTimer = 45f;
+    private bool readyToShow = false;
 
     private void Start()
     {
@@ -58,15 +60,26 @@ public class IntroPlayer : MonoBehaviour
 
         return InternalPath;
     }
+    private void Update()
+    {
+        if (readyToShow || finished) return;
+
+        delayTimer -= Time.deltaTime;
+
+        if (delayTimer <= 0f)
+        {
+            readyToShow = true;
+        }
+    }
 
     private void OnGUI()
     {
-        if (finished || !Playin || ExperimentalRender == null) return;
+        if (finished || !readyToShow || ExperimentalRender == null) return;
 
         GUI.DrawTexture(
-        new Rect(0, 0, Screen.width, Screen.height),
-        Texture2D.blackTexture
-    );
+            new Rect(0, 0, Screen.width, Screen.height),
+            Texture2D.blackTexture
+        );
 
         GUI.DrawTexture(
             new Rect(0, 0, Screen.width, Screen.height),
