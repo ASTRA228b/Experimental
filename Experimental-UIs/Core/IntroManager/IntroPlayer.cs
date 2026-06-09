@@ -17,30 +17,21 @@ public class IntroPlayer : MonoBehaviour
     private void Start()
     {
         string TempPath = PullFileFromDLL();
+
         GameObject Video = new("StartupVideo");
         DontDestroyOnLoad(Video);
+
         ExperimentalPlayer = Video.AddComponent<VideoPlayer>();
+
         ExperimentalRender = new(1920, 1080, 0);
+
         ExperimentalPlayer.renderMode = VideoRenderMode.RenderTexture;
         ExperimentalPlayer.targetTexture = ExperimentalRender;
+
         ExperimentalPlayer.url = TempPath;
         ExperimentalPlayer.playOnAwake = false;
         ExperimentalPlayer.isLooping = false;
         ExperimentalPlayer.waitForFirstFrame = true;
-        ExperimentalPlayer.prepareCompleted += vp =>
-        {
-            vp.Play();
-            Playin = true;
-        };
-        ExperimentalPlayer.loopPointReached += vp =>
-        {
-            Playin = false;
-            finished = true;
-
-            Destroy(vp.gameObject);
-            Destroy(this.gameObject);
-        };
-        ExperimentalPlayer.Prepare();
     }
 
     private string PullFileFromDLL()
@@ -62,19 +53,31 @@ public class IntroPlayer : MonoBehaviour
     }
     private void Update()
     {
-        if (readyToShow || finished) return;
+        if (finished) return;
 
-        delayTimer -= Time.deltaTime;
-
-        if (delayTimer <= 0f)
+        if (!readyToShow)
         {
-            readyToShow = true;
+            delayTimer -= Time.deltaTime;
+
+            if (delayTimer <= 0f)
+            {
+                readyToShow = true;
+                if (ExperimentalPlayer == null) return;
+                ExperimentalPlayer.Prepare();
+
+                ExperimentalPlayer.prepareCompleted += vp =>
+                {
+                    vp.Play();
+                    Playin = true;
+                };
+            }
         }
     }
 
     private void OnGUI()
     {
-        if (finished || !readyToShow || ExperimentalRender == null) return;
+        if (finished || !readyToShow || ExperimentalRender == null || !Playin)
+            return;
 
         GUI.DrawTexture(
             new Rect(0, 0, Screen.width, Screen.height),
