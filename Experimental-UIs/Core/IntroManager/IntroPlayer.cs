@@ -60,6 +60,7 @@ public class IntroPlayer : MonoBehaviour
                 };
 
                 ExperimentalPlayer.Prepare();
+                ExperimentalPlayer.Play();
             }
         }
     }
