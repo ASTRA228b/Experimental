@@ -11,19 +11,24 @@ public class IntroPlayer : MonoBehaviour
     private VideoPlayer? ExperimentalPlayer;
     private RenderTexture? ExperimentalRender;
 
-    private float delayTimer = 45f;
+    private float delayTimer = 15f;
     private bool started;
-
+    private GameObject? yes;
+    private Rect IntroRect = new(0, 0, Screen.width, Screen.height);
+    private bool openinging = false;
     private void Start()
     {
         string TempPath = PullFileFromDLL();
 
-        GameObject Video = new("StartupVideo");
-        DontDestroyOnLoad(Video);
+        Debug.Log($"[{Constantss.GUID}]: Video Path: {TempPath}");
 
-        ExperimentalPlayer = Video.AddComponent<VideoPlayer>();
+        yes = new GameObject("StartupVideo");
+        DontDestroyOnLoad(yes);
 
-        ExperimentalRender = new(1920, 1080, 0);
+        ExperimentalPlayer = yes.AddComponent<VideoPlayer>();
+
+        ExperimentalRender = new RenderTexture(1920, 1080, 0);
+        ExperimentalRender.Create();
 
         ExperimentalPlayer.renderMode = VideoRenderMode.RenderTexture;
         ExperimentalPlayer.targetTexture = ExperimentalRender;
@@ -32,56 +37,84 @@ public class IntroPlayer : MonoBehaviour
         ExperimentalPlayer.playOnAwake = false;
         ExperimentalPlayer.isLooping = false;
         ExperimentalPlayer.waitForFirstFrame = true;
-
         ExperimentalPlayer.audioOutputMode = VideoAudioOutputMode.None;
 
- 
-        ExperimentalPlayer.loopPointReached += OnVideoEnd;
+        ExperimentalPlayer.errorReceived += (vp, msg) =>
+        {
+            Debug.LogError($"[{Constantss.GUID}]: Video Error - {msg}");
+        };
+
+      
     }
 
     private void Update()
     {
-        if (started) return;
+        if (started)
+            return;
 
         delayTimer -= Time.deltaTime;
 
         if (delayTimer <= 0f)
         {
             started = true;
+           
 
-            if (ExperimentalPlayer == null) return;
 
+            if (ExperimentalPlayer == null)
+            {
+                Debug.LogError($"[{Constantss.GUID}]: VideoPlayer was null");
+                return;
+                
+            }
+
+            Debug.Log($"[{Constantss.GUID}]: Preparing Intro Video");
             ExperimentalPlayer.Prepare();
-            ExperimentalPlayer.Play();
+             if (ExperimentalPlayer != null)
+            ExperimentalPlayer.prepareCompleted += vp =>
+            {
+                vp.Play();
+            };
+            if (ExperimentalPlayer != null)
+                ExperimentalPlayer.loopPointReached += vp =>
+                {
+                  Debug.Log($"[{Constantss.GUID}]: Video Finished");
+                  OnVideoEnd(ExperimentalPlayer);
+                    started = false;
+                   
+                };
         }
     }
 
     private void OnGUI()
     {
-        if (!started || ExperimentalRender == null)
-            return;
+
+        IntroRect.width = Screen.width;
+        IntroRect.height = Screen.height;
+        if (openinging)
+        {
+            GUILayout.Window(9900090, IntroRect, yesss, "");
+        }
+        if (started == true)
+        {
+            openinging = true;
+        }
+        
+
+    }
+    private void OnVideoEnd(VideoPlayer vp) { if (vp != null) { Destroy(vp.gameObject); } }
+
+    private void yesss(int h)
+    {
+        GUI.DrawTexture(
+           new Rect(0, 0, IntroRect.width, IntroRect.height),
+           Texture2D.blackTexture
+       );
 
         GUI.DrawTexture(
-            new Rect(0, 0, Screen.width, Screen.height),
-            Texture2D.blackTexture
-        );
-
-        GUI.DrawTexture(
-            new Rect(0, 0, Screen.width, Screen.height),
+            new Rect(0, 0, IntroRect.width, IntroRect.height),
             ExperimentalRender,
             ScaleMode.ScaleToFit
         );
-    }
-
- 
-    private void OnVideoEnd(VideoPlayer vp)
-    {
-        if (vp != null)
-        {
-            Destroy(vp.gameObject);
-        }
-
-      
     }
 
     private string PullFileFromDLL()
@@ -97,10 +130,20 @@ public class IntroPlayer : MonoBehaviour
             return "";
         }
 
-        string InternalPath = Path.Combine(Application.persistentDataPath, "Experimental.mp4");
+        string InternalPath = Path.Combine(
+            Application.persistentDataPath,
+            "Experimental.mp4"
+        );
 
-        using FileStream EFile = new(InternalPath, FileMode.Create, FileAccess.Write);
+        using FileStream EFile = new(
+            InternalPath,
+            FileMode.Create,
+            FileAccess.Write
+        );
+
         STD.CopyTo(EFile);
+
+        Debug.Log($"[{Constantss.GUID}]: Extracted Video To: {InternalPath}");
 
         return InternalPath;
     }
