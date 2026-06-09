@@ -8,12 +8,13 @@ public class ControllerSystemManager : MonoBehaviour
 {
     private GameObject? ModSystemManagers;
 
-    private void Start() => Debug.LogWarning($"[{Constantss.ManagerObjectConst}]: Object Loaded");
+    private void Start() => Debug.Log($"[{Constantss.ManagerObjectConst}]: Object's Loaded Fully (Might have a Delay)");
 
     private void Awake()
     {
         ModSystemManagers = new(Constantss.ManagerObjectConst);
         ModSystemManagers.AddComponent<ATurnModController>();
+        // ModSystemManagers.AddComponent<>();
         DontDestroyOnLoad(ModSystemManagers);
     }
 }
