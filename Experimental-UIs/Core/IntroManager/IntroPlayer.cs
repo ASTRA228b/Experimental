@@ -1,150 +1,60 @@
 ﻿using Experimental.Stuff;
+using System.Collections;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.Video;
-using System.IO;
+using UnityEngine.Networking;
 
 namespace Experimental.Core.IntroManager;
 
 public class IntroPlayer : MonoBehaviour
 {
-    private VideoPlayer? ExperimentalPlayer;
-    private RenderTexture? ExperimentalRender;
+    private AudioSource? ExperimentalIntroAudio;
 
-    private float delayTimer = 15f;
-    private bool started;
-    private GameObject? yes;
-    private Rect IntroRect = new(0, 0, Screen.width, Screen.height);
-    private bool openinging = false;
     private void Start()
     {
-        string TempPath = PullFileFromDLL();
+        ExperimentalIntroAudio = gameObject.AddComponent<AudioSource>();
+        ExperimentalIntroAudio.playOnAwake = false;
+        ExperimentalIntroAudio.loop = false;
 
-        Debug.Log($"[{Constantss.GUID}]: Video Path: {TempPath}");
-
-        yes = new GameObject("StartupVideo");
-        DontDestroyOnLoad(yes);
-
-        ExperimentalPlayer = yes.AddComponent<VideoPlayer>();
-
-        ExperimentalRender = new RenderTexture(1920, 1080, 0);
-        ExperimentalRender.Create();
-
-        ExperimentalPlayer.renderMode = VideoRenderMode.RenderTexture;
-        ExperimentalPlayer.targetTexture = ExperimentalRender;
-
-        ExperimentalPlayer.url = TempPath;
-        ExperimentalPlayer.playOnAwake = false;
-        ExperimentalPlayer.isLooping = false;
-        ExperimentalPlayer.waitForFirstFrame = true;
-        ExperimentalPlayer.audioOutputMode = VideoAudioOutputMode.None;
-
-        ExperimentalPlayer.errorReceived += (vp, msg) =>
-        {
-            Debug.LogError($"[{Constantss.GUID}]: Video Error - {msg}");
-        };
-
-      
     }
 
-    private void Update()
+    private IEnumerator LoadAndPlay()
     {
-        if (started)
-            return;
-
-        delayTimer -= Time.deltaTime;
-
-        if (delayTimer <= 0f)
+        string FileDataPath = GetFileFromAssembly();
+        if (string.IsNullOrWhiteSpace(FileDataPath))
         {
-            started = true;
-           
-
-
-            if (ExperimentalPlayer == null)
-            {
-                Debug.LogError($"[{Constantss.GUID}]: VideoPlayer was null");
-                return;
-                
-            }
-
-            Debug.Log($"[{Constantss.GUID}]: Preparing Intro Video");
-            ExperimentalPlayer.Prepare();
-             if (ExperimentalPlayer != null)
-            ExperimentalPlayer.prepareCompleted += vp =>
-            {
-                vp.Play();
-            };
-            if (ExperimentalPlayer != null)
-                ExperimentalPlayer.loopPointReached += vp =>
-                {
-                  Debug.Log($"[{Constantss.GUID}]: Video Finished");
-                  OnVideoEnd(ExperimentalPlayer);
-                    started = false;
-                   
-                };
+            Debug.LogError($"[{Constantss.GUID}]: Failed To Extract File");
+            yield break;
         }
-    }
-
-    private void OnGUI()
-    {
-
-        IntroRect.width = Screen.width;
-        IntroRect.height = Screen.height;
-        if (openinging)
+        using UnityWebRequest IntroReq = UnityWebRequestMultimedia.GetAudioClip("file://" + FileDataPath, AudioType.MPEG);
+        yield return IntroReq.SendWebRequest();
+        if (IntroReq.result != UnityWebRequest.Result.Success)
         {
-            GUILayout.Window(9900090, IntroRect, yesss, "");
+            Debug.LogError(IntroReq.error);
+            yield break;
         }
-        if (started == true)
-        {
-            openinging = true;
-        }
-        
-
-    }
-    private void OnVideoEnd(VideoPlayer vp) { if (vp != null) { Destroy(vp.gameObject); } }
-
-    private void yesss(int h)
-    {
-        GUI.DrawTexture(
-           new Rect(0, 0, IntroRect.width, IntroRect.height),
-           Texture2D.blackTexture
-       );
-
-        GUI.DrawTexture(
-            new Rect(0, 0, IntroRect.width, IntroRect.height),
-            ExperimentalRender,
-            ScaleMode.ScaleToFit
-        );
+        AudioClip IClip = DownloadHandlerAudioClip.GetContent(IntroReq);
+        ExperimentalIntroAudio!.clip = IClip;
+        Debug.Log($"[{Constantss.GUID}]: Playing StartUp Sound");
+        ExperimentalIntroAudio?.Play();
+        yield return new WaitForSeconds(IClip.length);
+        Debug.Log($"[{Constantss.GUID}]: StartUp Stopped");
+        ExperimentalIntroAudio!.Stop();
     }
 
-    private string PullFileFromDLL()
+    private string GetFileFromAssembly()
     {
-        Assembly ExperimentalASM = Assembly.GetExecutingAssembly();
-        string RCSName = "Experimental.RCS.Experimental.mp4";
-
-        using Stream STD = ExperimentalASM.GetManifestResourceStream(RCSName);
-
-        if (STD == null)
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        using Stream ASMStream = assembly.GetManifestResourceStream("Experimental.RCS.nt4.mp3");
+        if (ASMStream == null)
         {
-            Debug.LogError($"[{Constantss.GUID}]: Embedded Video Not Found");
+            Debug.LogError($"[{Constantss.GUID}]: Intro Audio File Was Null");
             return "";
         }
-
-        string InternalPath = Path.Combine(
-            Application.persistentDataPath,
-            "Experimental.mp4"
-        );
-
-        using FileStream EFile = new(
-            InternalPath,
-            FileMode.Create,
-            FileAccess.Write
-        );
-
-        STD.CopyTo(EFile);
-
-        Debug.Log($"[{Constantss.GUID}]: Extracted Video To: {InternalPath}");
-
-        return InternalPath;
+        string DataPath = Path.Combine(Application.persistentDataPath, "nt4.mp3");
+        using FileStream NewFile = new(DataPath, FileMode.Create, FileAccess.Write);
+        ASMStream.CopyTo(NewFile);
+        return DataPath;
     }
+
 }

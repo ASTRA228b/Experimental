@@ -17,7 +17,10 @@
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
- 
+
+  <ItemGroup>
+    <EmbeddedResource Include="RCS\nt4.mp3"/>
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="0Harmony">
