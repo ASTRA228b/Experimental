@@ -15,7 +15,7 @@ public class IntroPlayer : MonoBehaviour
         ExperimentalIntroAudio = gameObject.AddComponent<AudioSource>();
         ExperimentalIntroAudio.playOnAwake = false;
         ExperimentalIntroAudio.loop = false;
-
+        StartCoroutine(LoadAndPlay());
     }
 
     private IEnumerator LoadAndPlay()
