@@ -45,7 +45,7 @@ public class IntroPlayer : MonoBehaviour
     private string GetFileFromAssembly()
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using Stream ASMStream = assembly.GetManifestResourceStream("Experimental.RCS.nt4.mp3");
+        using Stream ASMStream = assembly.GetManifestResourceStream("Experimental.RCS.ExperimentalStartSound.mp3");
         if (ASMStream == null)
         {
             Debug.LogError($"[{Constantss.GUID}]: Intro Audio File Was Null");
