@@ -12,11 +12,11 @@ namespace Experimental.Core;
 public class Main : MonoBehaviour
 {
     // internal vars (global vars are just for the mods)
-    private Rect Window = new(200, 110, 500, 150);
+    private Rect Window = new(200, 110, 550, 250);
     private bool Open = false;
     private bool SLoaded = false;
     private int TabInt = 0;
-    private readonly string[] Tabs = { "GUIs", "Utils" };
+    private readonly string[] Tabs = { "GUIs", "Utils", "Settings", "SB" };
     // for room stuff
     private string roomcode = "";
 
