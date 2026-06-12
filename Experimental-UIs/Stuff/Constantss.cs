@@ -10,4 +10,6 @@ internal class Constantss
 
     public const string ManagerObjectConst = "Astras.Mods.Experimental.SystemManager";
     public const string PitgeoLoaderConst = "Astras.Mods.Experimental.SystemManager.PitGeoManager";
+
+    public const string ExperimentalSoundManager = "Astras.Mods.Experiemntal.SoundManager";
 }

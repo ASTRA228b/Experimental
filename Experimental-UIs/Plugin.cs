@@ -4,6 +4,7 @@ using Experimental.Core;
 using Experimental.Stuff;
 using Experimental.Mods.Controllers.ControllerManagers;
 using Experimental.Core.IntroManager;
+using Experimental.Core.MainManagers;
 
 namespace Experimental.Plugin;
 
@@ -17,6 +18,7 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
+        SoundManager.Init();
         GameObject Plugin = new(Constantss.ObjectName);
         Plugin.AddComponent<Main>();
         Plugin.AddComponent<ControllerSystemManager>();
