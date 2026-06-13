@@ -1,8 +1,5 @@
-﻿using BepInEx;
-using Photon.Voice.Unity;
+﻿using Photon.Voice.Unity;
 using Experimental.Stuff;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -75,9 +72,6 @@ public static class SoundManager
 
     public static void Init()
     {
-        if (LocalScr != null)
-            return;
-
         GameObject Sound = new(Constantss.ExperimentalSoundManager + ".SoundOBJ");
         GameObject.DontDestroyOnLoad(Sound);
         LocalScr = Sound.AddComponent<AudioSource>();

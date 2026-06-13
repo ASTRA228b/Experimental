@@ -1,11 +1,12 @@
-﻿using Photon.Pun;
+﻿using Experimental.Core.GUIHelpers;
+using Experimental.Core.MainManagers;
+using Experimental.Mods.GUIs;
+using Experimental.Mods.GUIs.total_chaos.All_apply;
+using Experimental.Mods.OtherUtils;
+using Experimental.Mods.Settings;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Experimental.Core.GUIHelpers;
-using Experimental.Mods.GUIs;
-using Experimental.Mods.Settings;
-using Experimental.Mods.OtherUtils;
-using Experimental.Mods.GUIs.total_chaos.All_apply;
 
 namespace Experimental.Core;
 
@@ -40,6 +41,7 @@ public class Main : MonoBehaviour
         WallWalkUI.MakeWalkerUI();
         ATurnModGUI.MakeATurnModGUI();
         APitGeoModUI.MakePitGeoUI();
+        GSoundBaordGUI.MakeGSoundBoardGUI();
     }
 
     private void Update()
@@ -86,6 +88,14 @@ public class Main : MonoBehaviour
                 break;
             case 1:
                 Utils();
+                break;
+
+            case 2:
+                Settings();
+                break;
+
+            case 3:
+                SoundBoard();
                 break;
         }
         GUILayout.EndVertical();
@@ -144,5 +154,15 @@ public class Main : MonoBehaviour
             RoomMods.Leave();
         }
         GUILayout.EndHorizontal();
+    }
+
+    private void Settings()
+    {
+
+    }
+
+    private void SoundBoard()
+    {
+        GlobalVars.GSoundsOpen = GUILayout.Toggle(GlobalVars.GSoundsOpen, "GSoundboard");
     }
 }

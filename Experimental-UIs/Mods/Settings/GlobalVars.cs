@@ -159,4 +159,12 @@ public static class GlobalVars
     public static string[] PitGeoTabs = { "Main", "Input Settings" };
     public static int PitGeoWindowID = 2345763;
     public static string PitGeoWindowName = "E - Astras PitGeos";
+    // GSoundBoard
+    public static Rect GSoundBoardWindow = new(155, 155, 700, 500);
+    public static bool GSoundsOpen = false;
+    public static int GsoundsTabInt = 0;
+    public static string[] GSoundsTabs = { "Main", "Settings" };
+    public static string GSoundsWindowName = "E - GSoundBoard";
+    public static int GSoundBoardsID = 98452341;
+    public static Vector2 SoundBoardScroll;
 }
