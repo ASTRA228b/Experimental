@@ -91,6 +91,10 @@ public static class GSoundBaordGUI
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
         GUILayout.EndHorizontal();
+        if (GUILayout.Button("Stop All (Safer)", Buttonss))
+        {
+            SoundManager.StopAll();
+        }
     }
 
     public static void Settings()
