@@ -4,6 +4,13 @@ namespace Experimental.Core.GUIHelpers;
 
 public static class GlobalStyles
 {
+    public class StyleColors
+    {
+        public Color Window;
+        public Color Buttons;
+        public Color SliderTrack;
+        public Color SliderThumb;
+    }
     public static GUIStyle? WindowStyle, SliderStyle, SliderThumbStyle, Buttonss;
 
     private static Texture2D? Windowtex, Background, Slidertex, SliderThumbtex;
@@ -37,6 +44,24 @@ public static class GlobalStyles
         ApplyBackground(WindowStyle, Windowtex);
         ApplyBackground(SliderThumbStyle, SliderThumbtex);
         ApplyBackground(SliderStyle, Slidertex);
+    }
+    public static void SetColors(Color Window, Color Buttons, Color SliderTrack, Color SliderThumb)
+    {
+        WindowColor = Window;
+        ButtonColor = Buttons;
+        sliderTrackColor = SliderTrack;
+        sliderThumbColor = SliderThumb;
+        INIT();
+    }
+    public static StyleColors PullColors()
+    {
+        return new StyleColors
+        {
+            Window = WindowColor,
+            Buttons = ButtonColor,
+            SliderTrack = sliderTrackColor,
+            SliderThumb = sliderThumbColor
+        };
     }
     public static void ApplyBackground(GUIStyle style, Texture2D tex)
     {

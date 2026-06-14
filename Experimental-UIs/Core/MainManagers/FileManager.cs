@@ -1,4 +1,6 @@
-﻿using BepInEx;
+﻿using Experimental.Core.GUIHelpers;
+using System.IO;
+using BepInEx;
 using Experimental.Stuff;
 using System.Collections;
 using UnityEngine;
@@ -40,6 +42,45 @@ public class FileManager : MonoBehaviour
         }
         File.WriteAllBytes(SavePath, req.downloadHandler.data);
         Debug.Log($"[{Constantss.GUID}] Downloaded nt4.mp3");
+    }
+
+    public static void SaveFile(string FileName, string Data)
+    {
+        File.WriteAllText(Path.Combine(RootFolder, FileName), Data);
+    }
+    public static string LoadFile(string FileName)
+    {
+        string path = Path.Combine(RootFolder, FileName);
+
+        if (!File.Exists(path))
+            return string.Empty;
+
+        return File.ReadAllText(path);
+    }
+
+    public static void SaveGUISettings()
+    {
+        GlobalStyles.StyleColors colors = GlobalStyles.PullColors();
+        GUISettingsData data = new()
+        {
+            WindowColor = colors.Window,
+            ButtonColor = colors.Buttons,
+            SliderTrackColor = colors.SliderTrack,
+            SliderThumbColor = colors.SliderThumb
+        };
+        SaveFile("GUISettings.json", JsonUtility.ToJson(data, true));
+    }
+
+    public static void LoadGUISettings()
+    {
+        string json = LoadFile("GUISettings.json");
+        if (string.IsNullOrEmpty(json))
+        {
+            SaveGUISettings();
+            return;
+        }
+        GUISettingsData data = JsonUtility.FromJson<GUISettingsData>(json);
+        GlobalStyles.SetColors(data.WindowColor, data.ButtonColor, data.SliderTrackColor, data.SliderThumbColor);
     }
 
     public static string[] GetSoundFiles()

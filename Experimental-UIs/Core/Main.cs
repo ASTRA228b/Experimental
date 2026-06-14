@@ -20,12 +20,16 @@ public class Main : MonoBehaviour
     private readonly string[] Tabs = { "GUIs", "Utils", "Settings", "SB" };
     // for room stuff
     private string roomcode = "";
+    // yes 
+    private Rect StyleChangerRect = new(300, 150, 400, 450);
+    private bool StyleChangerOpne = false;
 
     private void OnGUI()
     {
         if (!SLoaded)
         {
             GlobalStyles.INIT();
+            FileManager.LoadGUISettings();
             SLoaded = true;
         }
         if (Open)
@@ -42,6 +46,10 @@ public class Main : MonoBehaviour
         ATurnModGUI.MakeATurnModGUI();
         APitGeoModUI.MakePitGeoUI();
         GSoundBaordGUI.MakeGSoundBoardGUI();
+        if (StyleChangerOpne)
+        {
+            StyleChangerRect = GUILayout.Window(7654398, StyleChangerRect, Style, "E - StyleChanger", GlobalStyles.WindowStyle);
+        }
     }
 
     private void Update()
@@ -158,11 +166,48 @@ public class Main : MonoBehaviour
 
     private void Settings()
     {
+        StyleChangerOpne = GUILayout.Toggle(StyleChangerOpne, "Style Settings");
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save Style", GlobalStyles.Buttonss))
+        {
+            FileManager.SaveGUISettings();
+        }
 
+        if (GUILayout.Button("Load Style", GlobalStyles.Buttonss))
+        {
+            FileManager.LoadGUISettings();
+        }
+        GUILayout.EndHorizontal();
     }
 
     private void SoundBoard()
     {
         GlobalVars.GSoundsOpen = GUILayout.Toggle(GlobalVars.GSoundsOpen, "GSoundboard");
+    }
+
+    // style changer (help me god)
+    private void Style(int id)
+    {
+        GlobalStyles.StyleColors Colors = GlobalStyles.PullColors();
+        Color Window = YesHelper("Window", Colors.Window);
+        Color Buttons = YesHelper("Buttons", Colors.Buttons);
+        Color Track = YesHelper("Slider Track", Colors.SliderTrack);
+        Color Thunb = YesHelper("Slider Thumb", Colors.SliderThumb);
+        GlobalStyles.SetColors(Window, Buttons, Track, Thunb);
+        GUILayout.Space(5f);
+        if (GUILayout.Button("Close", GlobalStyles.Buttonss))
+        {
+            StyleChangerOpne = !StyleChangerOpne;
+        }
+        GUI.DragWindow();
+    }
+    // lil helper 
+    private Color YesHelper(string Label, Color y)
+    {
+        GUILayout.Label(Label);
+        float r = GUILayout.HorizontalSlider(y.r, 0f, 1f, GlobalStyles.SliderStyle, GlobalStyles.SliderThumbStyle);
+        float g = GUILayout.HorizontalSlider(y.g, 0f, 1f, GlobalStyles.SliderStyle, GlobalStyles.SliderThumbStyle);
+        float b = GUILayout.HorizontalSlider(y.b, 0f, 1f, GlobalStyles.SliderStyle, GlobalStyles.SliderThumbStyle);
+        return new Color(r, g, b, 1f);
     }
 }
