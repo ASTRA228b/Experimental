@@ -83,4 +83,24 @@ public static class GSoundGUIManager
     {
         SoundManager.StopAll();
     }
+    public static void LoadSounds()
+    {
+        Tabs.Clear();
+
+        SoundTab main = new()
+        {
+            Name = "Main"
+        };
+
+        foreach (string file in FileManager.GetSoundFiles())
+        {
+            main.Cards.Add(new SoundCard
+            {
+                Name = Path.GetFileNameWithoutExtension(file),
+                FileName = file
+            });
+        }
+
+        Tabs.Add(main);
+    }
 }

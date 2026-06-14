@@ -162,11 +162,16 @@ public static class SoundManager
 
     public static void StopMic()
     {
-        Recorder R = GorillaTagger.Instance.myRecorder;
-        if (R == null) return;
-        R.SourceType = Recorder.InputSourceType.Microphone;
-        R.AudioClip = null;
-        R.RestartRecording(true);
+        Recorder rec = GorillaTagger.Instance.myRecorder;
+
+        if (rec == null)
+            return;
+
+        rec.StopRecording();
+        rec.AudioClip = null;
+        rec.SourceType = Recorder.InputSourceType.Microphone;
+
+        rec.StartRecording();
     }
 
     public static void StopLocal()

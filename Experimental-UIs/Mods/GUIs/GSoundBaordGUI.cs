@@ -106,5 +106,20 @@ public static class GSoundBaordGUI
         GUILayout.Label("Microphone Volume");
         SoundManager.MicrophoneVolume = GUILayout.HorizontalSlider(SoundManager.MicrophoneVolume, 0f, 5f, SliderStyle, SliderThumbStyle);
         GUILayout.Label($"Volume: {SoundManager.MicrophoneVolume:F2}");
+        GUILayout.Label("Sound Options");
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Toggle(GSoundGUIManager.PlaybackMode == SoundManager.PlaybackMode.Local, "Local"))
+        {
+            GSoundGUIManager.PlaybackMode = SoundManager.PlaybackMode.Local;
+        }
+        if (GUILayout.Toggle(GSoundGUIManager.PlaybackMode == SoundManager.PlaybackMode.Microphone, "Microphone"))
+        {
+            GSoundGUIManager.PlaybackMode = SoundManager.PlaybackMode.Microphone;
+        }
+        if (GUILayout.Toggle(GSoundGUIManager.PlaybackMode == SoundManager.PlaybackMode.Both, "Both"))
+        {
+            GSoundGUIManager.PlaybackMode = SoundManager.PlaybackMode.Both;
+        }
+        GUILayout.EndHorizontal();
     }
 }

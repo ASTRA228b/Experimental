@@ -5,6 +5,7 @@ using Experimental.Stuff;
 using Experimental.Mods.Controllers.ControllerManagers;
 using Experimental.Core.IntroManager;
 using Experimental.Core.MainManagers;
+using Experimental.Mods.Controllers;
 
 namespace Experimental.Plugin;
 
@@ -19,10 +20,12 @@ public class Plugin : BaseUnityPlugin
     private void Awake()
     {
         SoundManager.Init();
+        GSoundBoardTabStarter.InitGSB();
         GameObject Plugin = new(Constantss.ObjectName);
         Plugin.AddComponent<Main>();
         Plugin.AddComponent<ControllerSystemManager>();
         Plugin.AddComponent<IntroPlayer>(); // fuck ts bro im lowk pissed ive spent 4 hours debugging ts its not worth it at all   
+        Plugin.AddComponent<FileManager>();
         DontDestroyOnLoad(Plugin);
     }
 }
