@@ -167,4 +167,13 @@ public static class GlobalVars
     public static string GSoundsWindowName = "E - GSoundBoard";
     public static int GSoundBoardsID = 98452341;
     public static Vector2 SoundBoardScroll;
+
+    // Particle and other
+    public static Rect PartUIRect = new(155, 155, 360, 460);
+    public static bool PartUIOpen = false;
+    public static string PartUIName = "E - AParticleSystems";
+    public static int PartWId = 4827;
+    // maybe 
+    public static string[] PartUITabs = { "Main", "Settings" };
+    public static int PartUITabInt = 0;
 }

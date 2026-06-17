@@ -46,6 +46,7 @@ public class Main : MonoBehaviour
         ATurnModGUI.MakeATurnModGUI();
         APitGeoModUI.MakePitGeoUI();
         GSoundBaordGUI.MakeGSoundBoardGUI();
+        AParticleSystems.MakeParticleUI();
         if (StyleChangerOpne)
         {
             StyleChangerRect = GUILayout.Window(7654398, StyleChangerRect, Style, "E - StyleChanger", GlobalStyles.WindowStyle);
@@ -54,6 +55,7 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
+        AParticleSystems.Handler();
         // Only For Apreds
         ApredsUI.RunMod(); // Apreds
         // Keybind
@@ -127,6 +129,7 @@ public class Main : MonoBehaviour
         GUILayout.BeginHorizontal();
         GlobalVars.ATurnWindowOpen = GUILayout.Toggle(GlobalVars.ATurnWindowOpen, "Astras TurnMod");
         GlobalVars.PitGeoGUIOpen = GUILayout.Toggle(GlobalVars.PitGeoGUIOpen, "Astras PitGeo GUI");
+        GlobalVars.PartUIOpen = GUILayout.Toggle(GlobalVars.PartUIOpen, "AParticleSystems");
         GUILayout.EndHorizontal();
     }
 
