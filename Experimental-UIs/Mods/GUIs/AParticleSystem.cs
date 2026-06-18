@@ -10,6 +10,9 @@ public static class AParticleSystems
     // internal vars
     private static bool FistsEnabled = false;
     private static bool Lightning = false;
+    private static bool NabulaStorm = false;
+    private static bool BlackWhole = false;
+    private static bool WhiteWhole = false;
 
     public static void MakeParticleUI()
     {
@@ -35,6 +38,9 @@ public static class AParticleSystems
         GUILayout.Label("Particle Systems");
         FistsEnabled = GUILayout.Toggle(FistsEnabled, "FireFists");
         Lightning = GUILayout.Toggle(Lightning, "Forest Lightning");
+        NabulaStorm = GUILayout.Toggle(NabulaStorm, "NebulaStorm");
+        BlackWhole = GUILayout.Toggle(BlackWhole, "Black Whole");
+        WhiteWhole = GUILayout.Toggle(WhiteWhole, "White Whole");
     }
 
     public static void Handler()
@@ -42,6 +48,12 @@ public static class AParticleSystems
         // fire Fists
         ParticleManager.Toggle("LeftFist", FistsEnabled);
         ParticleManager.Toggle("RightFist", FistsEnabled);
+        // light thingy yes
         ParticleManager.Toggle("Lightning", Lightning);
+        // Nebula
+        ParticleManager.Toggle("NebulaStorm", NabulaStorm);
+        // black & white whole
+        ParticleManager.Toggle("BlackHole", BlackWhole);
+        ParticleManager.Toggle("WhiteHole", WhiteWhole);
     }
 }
