@@ -30,7 +30,7 @@ public static class ACamUtils
     public static void Mod()
     {
         GUILayout.BeginVertical();
-        CamTabInt = GUILayout.Toolbar(CamTabInt, CamUITabNames);
+        CamTabInt = GUILayout.Toolbar(CamTabInt, CamUITabNames, Buttonss);
         switch (CamTabInt)
         {
             case 0:
