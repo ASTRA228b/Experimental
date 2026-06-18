@@ -718,6 +718,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Mods\ModMenuMods\Mods\" />
     <Folder Include="RCS\" />
   </ItemGroup>
 
