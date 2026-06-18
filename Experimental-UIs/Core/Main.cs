@@ -48,6 +48,7 @@ public class Main : MonoBehaviour
         GSoundBaordGUI.MakeGSoundBoardGUI();
         AParticleSystems.MakeParticleUI();
         AModMenuUI.MakeModUI();
+        ACamUtils.MakeCamUI();
         if (StyleChangerOpne)
         {
             StyleChangerRect = GUILayout.Window(7654398, StyleChangerRect, Style, "E - StyleChanger", GlobalStyles.WindowStyle);
