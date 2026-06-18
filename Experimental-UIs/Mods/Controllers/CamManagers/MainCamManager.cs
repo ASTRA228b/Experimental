@@ -21,7 +21,7 @@ public class MainCamManager : MonoBehaviour
         smoothing = new SmoothingManager();
         mainCam = Camera.main;
 
-        GameObject shoulderCamObj = GameObject.Find("Shoulder Camera");
+        GameObject shoulderCamObj = GameObject.Find("Player Objects/Third Person Camera/Shoulder Camera");
 
         if (shoulderCamObj != null)
         {
