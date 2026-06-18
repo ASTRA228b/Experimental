@@ -39,9 +39,10 @@ public class FovManager : MonoBehaviour
 
     private void HandleThirdPerson()
     {
-        if (pcOutputCam == null) return;
+        if (shoulderCamObj == null)
+            return;
 
-        pcOutputCam.enabled = ThirdPersonEnabeld;
+        shoulderCamObj.SetActive(ThirdPersonEnabeld);
     }
 
 
