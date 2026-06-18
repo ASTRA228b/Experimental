@@ -718,7 +718,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mods\ModMenuMods\Mods\Fun\" />
     <Folder Include="Mods\ModMenuMods\Mods\Misc\" />
     <Folder Include="Mods\ModMenuMods\Mods\OP\" />
     <Folder Include="Mods\ModMenuMods\Mods\Player\" />
