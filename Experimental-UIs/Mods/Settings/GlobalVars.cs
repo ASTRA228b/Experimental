@@ -176,4 +176,10 @@ public static class GlobalVars
     // maybe 
     public static string[] PartUITabs = { "Main", "Settings" };
     public static int PartUITabInt = 0;
+    // Mod Menu 
+    // (all other todo with system is internal)
+    public static Rect ModMUIRect = new(155, 155, 360, 460);
+    public static bool ModMUIOpen = false;
+    public static string ModMUIName = "E - AModMenu";
+    public static int ModMWId = 4899712;
 }

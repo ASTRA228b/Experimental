@@ -47,6 +47,7 @@ public class Main : MonoBehaviour
         APitGeoModUI.MakePitGeoUI();
         GSoundBaordGUI.MakeGSoundBoardGUI();
         AParticleSystems.MakeParticleUI();
+        AModMenuUI.MakeModUI();
         if (StyleChangerOpne)
         {
             StyleChangerRect = GUILayout.Window(7654398, StyleChangerRect, Style, "E - StyleChanger", GlobalStyles.WindowStyle);
@@ -131,6 +132,11 @@ public class Main : MonoBehaviour
         GlobalVars.PitGeoGUIOpen = GUILayout.Toggle(GlobalVars.PitGeoGUIOpen, "Astras PitGeo GUI");
         GlobalVars.PartUIOpen = GUILayout.Toggle(GlobalVars.PartUIOpen, "AParticleSystems");
         GUILayout.EndHorizontal();
+        GUILayout.Space(2f);
+        GUILayout.BeginHorizontal();
+        GlobalVars.ModMUIOpen = GUILayout.Toggle(GlobalVars.ModMUIOpen, "AModMenu");
+        GUILayout.EndHorizontal();
+
     }
 
     private void Utils()

@@ -16,6 +16,7 @@ public class ControllerSystemManager : MonoBehaviour
         ModSystemManagers.AddComponent<ATurnModController>();
         ModSystemManagers.AddComponent<PitGeoManager>();
         ModSystemManagers.AddComponent<ParticleInitManager>(); // Might be buggy - Astra
+        ModSystemManagers.AddComponent<ModRegSystem>();
         DontDestroyOnLoad(ModSystemManagers);
     }
 }

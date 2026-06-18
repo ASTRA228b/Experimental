@@ -1,4 +1,6 @@
-﻿namespace Experimental.Mods.ModMenuMods.Managed;
+﻿using static Experimental.Mods.GUIs.AModMenuUI;
+
+namespace Experimental.Mods.ModMenuMods.Managed;
 
 public static class ModsManager
 {
@@ -36,5 +38,12 @@ public static class ModsManager
             if (mod.Enabled)
                 mod.FixedUpdate();
         }
+    }
+
+    public static List<ExpMod> GetMods(Cat category)
+    {
+        return Mods.Values
+            .Where(x => x.Category == category)
+            .ToList();
     }
 }
