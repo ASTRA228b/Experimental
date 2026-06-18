@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Experimental.Mods.Controllers;
+using Experimental.Mods.Controllers.CamManagers;
 using Experimental.Stuff;
-using Experimental.Mods.Controllers;
+using UnityEngine;
 
 namespace Experimental.Mods.Controllers.ControllerManagers;
 
@@ -17,6 +18,7 @@ public class ControllerSystemManager : MonoBehaviour
         ModSystemManagers.AddComponent<PitGeoManager>();
         ModSystemManagers.AddComponent<ParticleInitManager>(); // Might be buggy - Astra
         ModSystemManagers.AddComponent<ModRegSystem>();
+        ModSystemManagers.AddComponent<MainCamManager>();
         DontDestroyOnLoad(ModSystemManagers);
     }
 }

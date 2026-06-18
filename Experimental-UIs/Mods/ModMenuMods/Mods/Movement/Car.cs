@@ -8,63 +8,80 @@ namespace Experimental.Mods.ModMenuMods.Mods.Movement;
 
 public class Car : ExpMod
 {
-    public static Vector3 velocity;
+    private static Vector3 velocity;
+
+    private const float Speed = 10f;
+    private const float MaxGroundDist = 2f;
+
+    private const float Accel = 14f;
+    private const float AirControl = 0.7f;
+    private const float Drag = 0.98f;
+
     public Car() : base("Car", Cat.Movement) { }
 
     public override void FixedUpdate()
     {
-        CarMod(10f, 2f);
-    }
+        GTPlayer player = GTPlayer.Instance;
 
-    public void CarMod(float speed, float maxGroundDist)
-    {
-        if (GTPlayer.Instance == null || GTPlayer.Instance.bodyCollider == null) return;
-        RaycastHit hit;
-        float groundY = 0f;
-        bool grounded = false;
-        if (Physics.Raycast(
-            GTPlayer.Instance.transform.position,
+        if (player == null || player.bodyCollider == null)
+            return;
+
+        bool grounded = Physics.Raycast(
+            player.transform.position,
             Vector3.down,
-            out hit,
+            out RaycastHit hit,
             10f,
-            GTPlayer.Instance.locomotionEnabledLayers))
-        {
-            groundY = hit.point.y;
-            float playerY = GTPlayer.Instance.bodyCollider.bounds.min.y;
-            grounded = (playerY - groundY) <= maxGroundDist;
-        }
+            player.locomotionEnabledLayers)
+            && (player.bodyCollider.bounds.min.y - hit.point.y) <= MaxGroundDist;
 
         Vector2 input = InputLib.LeftJoyStickAxis;
 
-        if (input.magnitude < 0.05f)
+        if (input.sqrMagnitude < 0.0025f)
         {
-            velocity = Vector3.Lerp(velocity, Vector3.zero, 6f * Time.deltaTime);
+            velocity = Vector3.Lerp(
+                velocity,
+                Vector3.zero,
+                6f * Time.deltaTime);
+
             return;
         }
-        Transform head = GTPlayer.Instance.headCollider.transform;
+
+        Transform head = player.headCollider.transform;
+
         Vector3 forward = head.forward;
         forward.y = 0f;
-        forward.Normalize();
+
         Vector3 right = head.right;
         right.y = 0f;
-        right.Normalize();
-        Vector3 targetDir = (forward * input.y + right * input.x).normalized;
-        float accel = Mathf.Lerp(6f, 14f, speed / 10f);
-        float airControl = Mathf.Lerp(0.3f, 0.7f, speed / 10f);
-        float drag = Mathf.Lerp(0.90f, 0.98f, speed / 10f);
-        float currentAccel = grounded ? accel : accel * airControl;
-        velocity = Vector3.Lerp(velocity, targetDir * speed, currentAccel * Time.deltaTime);
-        GTPlayer.Instance.transform.position += velocity * Time.deltaTime;
+
+        Vector3 moveDir =
+            (forward.normalized * input.y +
+             right.normalized * input.x).normalized;
+
+        float accel = grounded ? Accel : Accel * AirControl;
+
+        velocity = Vector3.Lerp(
+            velocity,
+            moveDir * Speed,
+            accel * Time.deltaTime);
+
+        player.transform.position += velocity * Time.deltaTime;
+
         if (!grounded)
         {
-            velocity *= drag;
+            velocity *= Drag;
+            return;
         }
-        float currentY = GTPlayer.Instance.bodyCollider.bounds.min.y;
-        if (grounded && currentY < groundY)
+
+        float bodyY = player.bodyCollider.bounds.min.y;
+
+        if (bodyY < hit.point.y)
         {
-            Vector3 pos = GTPlayer.Instance.transform.position;
-            pos.y = Mathf.Lerp(pos.y, pos.y + (groundY - currentY), 12f * Time.deltaTime);
-            GTPlayer.Instance.transform.position = pos;
+            Vector3 pos = player.transform.position;
+
+            pos.y += (hit.point.y - bodyY) * 12f * Time.deltaTime;
+
+            player.transform.position = pos;
         }
     }
 }

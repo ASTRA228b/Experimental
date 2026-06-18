@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Oculus.Interaction;
+using UnityEngine;
 
 namespace Experimental.Mods.Settings;
 
@@ -182,4 +183,31 @@ public static class GlobalVars
     public static bool ModMUIOpen = false;
     public static string ModMUIName = "E - AModMenu";
     public static int ModMWId = 4899712;
+
+    // CamControls
+    // smoothing vars
+    public static float MainSmooth = 0.1f;
+    public static float RotSmooth = 10f;
+
+    public static float KalmanR = 99f;
+
+    public static bool MainEnabled = true;
+    public static bool LivEnabled = true;
+
+    // fov vars
+    public static float MainFOV = 10f;
+    public static bool MainFOVEnabled = false;
+
+    public static float PCFOV = 10f;
+    public static bool PCFOVEnabled = false;
+
+    public static bool ThirdPersonEnabeld = true;
+    // gui vars
+    public static Rect CamUiRect = new(155, 155, 260, 460);
+    public static bool CamUIOpen = false;
+    public static string CamUIName = "E - ACamUtils";
+    public static int CamUIWId = 567832;
+    // other
+    public static string[] CamUITabNames = { "Fov Changer", "CamSmoother" };
+    public static int CamTabInt = 0;
 }

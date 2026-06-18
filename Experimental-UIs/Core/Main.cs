@@ -135,6 +135,7 @@ public class Main : MonoBehaviour
         GUILayout.Space(2f);
         GUILayout.BeginHorizontal();
         GlobalVars.ModMUIOpen = GUILayout.Toggle(GlobalVars.ModMUIOpen, "AModMenu");
+        GlobalVars.CamUIOpen = GUILayout.Toggle(GlobalVars.CamUIOpen, "ACamUtils");
         GUILayout.EndHorizontal();
 
     }
