@@ -203,7 +203,7 @@ public static class GlobalVars
 
     public static bool ThirdPersonEnabeld = true;
     // gui vars
-    public static Rect CamUiRect = new(155, 155, 260, 460);
+    public static Rect CamUiRect = new(155, 155, 360, 460);
     public static bool CamUIOpen = false;
     public static string CamUIName = "E - ACamUtils";
     public static int CamUIWId = 567832;
