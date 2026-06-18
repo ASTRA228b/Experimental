@@ -19,6 +19,7 @@ public class ControllerSystemManager : MonoBehaviour
         ModSystemManagers.AddComponent<ParticleInitManager>(); // Might be buggy - Astra
         ModSystemManagers.AddComponent<ModRegSystem>();
         ModSystemManagers.AddComponent<MainCamManager>();
+        ModSystemManagers.AddComponent<FovManager>();
         DontDestroyOnLoad(ModSystemManagers);
     }
 }

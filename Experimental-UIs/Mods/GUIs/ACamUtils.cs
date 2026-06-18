@@ -57,6 +57,7 @@ public static class ACamUtils
         GUILayout.Label($"PC FOV (NW): {PCFOV:F1}");
         GUILayout.Label("Enable / Disable PC Camera");
         ThirdPersonEnabeld = GUILayout.Toggle(ThirdPersonEnabeld, "Third Person Camera Enabled");
+        GUILayout.Label("Status - Not Working");
     }
 
     public static void CamSmoother()
@@ -73,6 +74,7 @@ public static class ACamUtils
         GUILayout.Space(10);
         GUILayout.Label("Kalman R: " +KalmanR.ToString("F0"));
         KalmanR = GUILayout.HorizontalSlider(KalmanR, 1f, 200f, SliderStyle, SliderThumbStyle);
+        GUILayout.Label("Status - Maybe Working");
     }
 
 
