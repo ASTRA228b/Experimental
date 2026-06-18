@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using UnityEngine;
+using Experimental.Mods.ModMenuMods.Managed;
+using static Experimental.Mods.GUIs.AModMenuUI;
 
-namespace Experimental.Mods.ModMenuMods.Mods.Movement
+namespace Experimental.Mods.ModMenuMods.Mods.Movement;
+
+public class Frozone : ExpMod
 {
-    internal class Frozone
-    {
-    }
+    public Frozone() : base("Frozone", Cat.Movement) { }
+
 }
