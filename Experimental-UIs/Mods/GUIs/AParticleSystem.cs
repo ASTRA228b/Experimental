@@ -13,6 +13,9 @@ public static class AParticleSystems
     private static bool NabulaStorm = false;
     private static bool BlackWhole = false;
     private static bool WhiteWhole = false;
+    private static bool Domainz = false;
+    private static bool FireballEnabled = false;
+    private static bool Draw = false;
 
     public static void MakeParticleUI()
     {
@@ -41,6 +44,9 @@ public static class AParticleSystems
         NabulaStorm = GUILayout.Toggle(NabulaStorm, "NebulaStorm");
         BlackWhole = GUILayout.Toggle(BlackWhole, "Black Whole");
         WhiteWhole = GUILayout.Toggle(WhiteWhole, "White Whole");
+        Domainz = GUILayout.Toggle(Domainz, "Domain");
+        FireballEnabled = GUILayout.Toggle(FireballEnabled, "Fireball");
+        Draw = GUILayout.Toggle(Draw, "Draw");
     }
 
     public static void Handler()
@@ -55,5 +61,10 @@ public static class AParticleSystems
         // black & white whole
         ParticleManager.Toggle("BlackHole", BlackWhole);
         ParticleManager.Toggle("WhiteHole", WhiteWhole);
+        // domain
+        ParticleManager.Toggle("Domain", Domainz);
+        // magic
+        ParticleManager.Toggle("Fireball", FireballEnabled);
+        ParticleManager.Toggle("Draw", Draw);
     }
 }

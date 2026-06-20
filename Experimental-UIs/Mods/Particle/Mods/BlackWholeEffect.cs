@@ -49,19 +49,23 @@ public class BlackHoleEffect : Effect
             return;
 
         Collider[] colliders = Physics.OverlapSphere(Root.transform.position, 10f);
+
         foreach (Collider col in colliders)
         {
             Rigidbody rb = col.attachedRigidbody;
+
             if (rb == null)
                 continue;
 
             Vector3 direction = Root.transform.position - rb.position;
-            float distance = direction.magnitude;
-            if (distance < 0.1f)
-                continue;
+            float distance = Mathf.Max(direction.magnitude, 0.5f);
 
-            float force = Mathf.Clamp(1000f / distance, 0f, 10f);
-            rb.AddForce(direction.normalized * force * Time.deltaTime, ForceMode.Acceleration);
+            float force = 800f / (distance * distance);
+
+            rb.AddForce(
+                direction.normalized * force,
+                ForceMode.Acceleration
+            );
         }
     }
 }
