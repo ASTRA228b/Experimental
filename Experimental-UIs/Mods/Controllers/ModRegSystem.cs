@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Experimental.Mods.ModMenuMods.Managed;
+using Experimental.Mods.ModMenuMods.Mods.Fun;
 using Experimental.Mods.ModMenuMods.Mods.Movement;
 
 namespace Experimental.Mods.Controllers;
@@ -22,8 +23,9 @@ public class ModRegSystem : MonoBehaviour
         ModsManager.Register("ZeroGrav", new ZeroGav());
         ModsManager.Register("LowGrav", new LowGrav());
         ModsManager.Register("HighGrav", new HighGrav());
+        ModsManager.Register("Fan", new Fan());
         // Fun
-
+        ModsManager.Register("PunchMod", new PunhcMod());
         // Misc
 
         // OP
