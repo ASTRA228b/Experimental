@@ -26,7 +26,7 @@ public class ModRegSystem : MonoBehaviour
         ModsManager.Register("HighGrav", new HighGrav());
         ModsManager.Register("Fan", new Fan()); // buggy 
         // Fun
-        // ModsManager.Register("PunchMod", new PunhcMod()); // broken
+        ModsManager.Register("PunchMod", new PunhcMod()); // broken
         // Misc
 
         // OP
