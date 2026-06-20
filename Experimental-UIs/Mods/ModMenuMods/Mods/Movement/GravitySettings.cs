@@ -6,7 +6,7 @@ public static class GravitySettings
 {
     public static void ZeroGravity()
     {
-        Physics.gravity = Vector3.zero;
+        GorillaTagger.Instance.rigidbody.AddForce(-Physics.gravity, ForceMode.Acceleration);
     }
 
     public static void LowGravity()
