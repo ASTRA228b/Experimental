@@ -1,6 +1,6 @@
-﻿using Experimental.Mods.ModMenuMods.Managed;
+﻿using GorillaLocomotion;
+using Experimental.Mods.ModMenuMods.Managed;
 using static Experimental.Mods.GUIs.AModMenuUI;
-using GorillaLocomotion;
 
 namespace Experimental.Mods.ModMenuMods.Mods.Movement;
 
