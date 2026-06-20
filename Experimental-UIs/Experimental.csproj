@@ -722,7 +722,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mods\ModMenuMods\Mods\OP\" />
+    <Folder Include="Mods\ModMenuMods\Mods\Improtant\" />
+    <Folder Include="Mods\ModMenuMods\Mods\Advantages\" />
+    <Folder Include="Mods\ModMenuMods\Mods\Overpowerd\" />
+    <Folder Include="Mods\ModMenuMods\Mods\Safety\" />
+    <Folder Include="Mods\ModMenuMods\Mods\Projectiles\" />
     <Folder Include="Mods\ModMenuMods\Mods\Player\" />
     <Folder Include="RCS\" />
   </ItemGroup>

@@ -13,13 +13,17 @@ public static class AModMenuUI
     {
         Fun,
         Movement,
+        Important,
+        Advantages,
+        Projectiles,
+        Overpowerd,
         Misc,
-        OP,
-        Player
+        Player,
+        Safety
     }
     public static Cat Yes = Cat.Fun;
     private static int CPage = 0;
-    private const int ModPerPage = 6;
+    private const int ModPerPage = 10;
     public static void MakeModUI()
     {
         if (ModMUIOpen)
