@@ -10,7 +10,12 @@ public class SpeedBoost : ExpMod
 
     public override void FixedUpdate()
     {
+        Spedboost();
+    }
+
+    public void Spedboost()
+    {
         GTPlayer.Instance.maxJumpSpeed = 999f;
-        GTPlayer.Instance.jumpMultiplier = 1f;
+        GTPlayer.Instance.jumpMultiplier = 1.3f;
     }
 }

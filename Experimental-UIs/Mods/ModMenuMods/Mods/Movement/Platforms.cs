@@ -11,13 +11,19 @@ public class Platforms : ExpMod
 {
     private GameObject? leftPlatform;
     private GameObject? rightPlatform;
+    private bool leftSpawned;
+    private bool rightSpawned;
 
     public Platforms() : base("Platforms", Cat.Movement) { }
     public override void Enable()
     {
         base.Enable();
-        leftPlatform = CreateLeftPlatform();
-        rightPlatform = CreateRightPlatform();
+
+        leftPlatform = null;
+        rightPlatform = null;
+
+        leftSpawned = false;
+        rightSpawned = false;
     }
 
     public override void Disable()
@@ -30,36 +36,58 @@ public class Platforms : ExpMod
 
         leftPlatform = null;
         rightPlatform = null;
+
+        leftSpawned = false;
+        rightSpawned = false;
+
         base.Disable();
     }
 
     public override void Update()
     {
-        if (leftPlatform == null || rightPlatform == null)
-            return;
-        bool leftGripHeld = InputLib.LeftGrab || Keyboard.current.lKey.isPressed;
-        if (leftGripHeld)
+        bool leftGrip = InputLib.LeftGrab;
+        bool rightGrip = InputLib.RightGrab;
+
+        if (leftGrip && leftPlatform == null)
+            leftPlatform = CreateLeftPlatform();
+
+        if (rightGrip && rightPlatform == null)
+            rightPlatform = CreateRightPlatform();
+
+        if (leftGrip && leftPlatform != null && !leftSpawned)
         {
-            leftPlatform.SetActive(true);
-            leftPlatform.transform.position = GTPlayer.Instance.LeftHand.controllerTransform.position;
-            leftPlatform.transform.rotation = GTPlayer.Instance.LeftHand.controllerTransform.rotation;
-        }
-        else
-        {
-            leftPlatform.SetActive(false);
+            leftPlatform.transform.position =
+                GTPlayer.Instance.LeftHand.controllerTransform.position;
+
+            leftPlatform.transform.rotation =
+                GTPlayer.Instance.LeftHand.controllerTransform.rotation;
+
+            leftSpawned = true;
         }
 
-        bool rightGripHeld = InputLib.RightGrab || Keyboard.current.kKey.isPressed;
+        if (rightGrip && rightPlatform != null && !rightSpawned)
+        {
+            rightPlatform.transform.position =
+                GTPlayer.Instance.RightHand.controllerTransform.position;
 
-        if (rightGripHeld)
-        {
-            rightPlatform.SetActive(true);
-            rightPlatform.transform.position = GTPlayer.Instance.RightHand.controllerTransform.position;
-            rightPlatform.transform.rotation = GTPlayer.Instance.RightHand.controllerTransform.rotation;
+            rightPlatform.transform.rotation =
+                GTPlayer.Instance.RightHand.controllerTransform.rotation;
+
+            rightSpawned = true;
         }
-        else
+
+        if (!leftGrip && leftPlatform != null)
         {
-            rightPlatform.SetActive(false);
+            GameObject.Destroy(leftPlatform);
+            leftPlatform = null;
+            leftSpawned = false;
+        }
+
+        if (!rightGrip && rightPlatform != null)
+        {
+            GameObject.Destroy(rightPlatform);
+            rightPlatform = null;
+            rightSpawned = false;
         }
     }
 
@@ -68,7 +96,6 @@ public class Platforms : ExpMod
     {
         GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
         GameObject.Destroy(platform.GetComponent<Rigidbody>());
-        GameObject.Destroy(platform.GetComponent<BoxCollider>());
         GameObject.Destroy(platform.GetComponent<Renderer>());
         platform.transform.localScale = new Vector3(0.25f, 0.3f, 0.25f);
         GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -87,7 +114,6 @@ public class Platforms : ExpMod
     {
         GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
         GameObject.Destroy(platform.GetComponent<Rigidbody>());
-        GameObject.Destroy(platform.GetComponent<BoxCollider>());
         GameObject.Destroy(platform.GetComponent<Renderer>());
         platform.transform.localScale = new Vector3(0.25f, 0.3f, 0.25f);
         GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
