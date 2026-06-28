@@ -34,6 +34,12 @@ public class Fireball : Effect
             GameObject fireball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             fireball.transform.position = SpawnPosition;
             fireball.transform.localScale = Vector3.one;
+            Renderer renderer = fireball.GetComponent<Renderer>();
+            Material mat = new Material(Shader.Find("Standard"));
+            mat.color = new Color(1f, 0.35f, 0f);
+            mat.EnableKeyword("_EMISSION");
+            mat.SetColor("_EmissionColor", new Color(2f, 0.6f, 0f));
+            renderer.material = mat;
             Rigidbody rb = fireball.AddComponent<Rigidbody>();
             rb.useGravity = false;
             rb.AddForce(Direction * Speed, ForceMode.Impulse);
@@ -45,10 +51,13 @@ public class Fireball : Effect
             main.startSpeed = 1f;
             var emission = particles.emission;
             emission.rateOverTime = 50f;
+            var psRenderer = particles.GetComponent<ParticleSystemRenderer>();
+            Material particleMat = new Material(Shader.Find("Particles/Standard Unlit"));
+            particleMat.color = new Color(1f, 0.5f, 0f);
+            psRenderer.material = particleMat;
             GameObject.Destroy(fireball, 5f);
         }
-
-        if (!InputLib.RightControllerAButton || !Keyboard.current.rKey.isPressed)
+        if (!InputLib.RightControllerAButton && !Keyboard.current.rKey.isPressed)
         {
             IsFireballCast = false;
         }

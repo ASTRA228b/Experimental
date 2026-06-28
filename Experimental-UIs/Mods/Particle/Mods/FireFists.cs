@@ -24,6 +24,10 @@ public class FireFists : Effect
         main.loop = true;
         var emission = System.emission;
         emission.rateOverTime = 15;
+        var renderer = System.GetComponent<ParticleSystemRenderer>();
+        Material material = new Material(Shader.Find("Particles/Standard Unlit"));
+        material.color = Color.red;
+        renderer.material = material;
         Root.SetActive(false);
     }
 
