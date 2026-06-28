@@ -1,6 +1,4 @@
-﻿using Experimental.Core.GUIHelpers;
-using Fusion;
-using UnityEngine; 
+﻿using UnityEngine; 
 using static Experimental.Core.GUIHelpers.GlobalStyles;
 using static Experimental.Mods.Settings.GlobalVars;
 
@@ -76,6 +74,4 @@ public static class ACamUtils
         KalmanR = GUILayout.HorizontalSlider(KalmanR, 1f, 200f, SliderStyle, SliderThumbStyle);
         GUILayout.Label("Status - Maybe Working");
     }
-
-
 }
