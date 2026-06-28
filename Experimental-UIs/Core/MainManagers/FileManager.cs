@@ -1,5 +1,5 @@
 ﻿using Experimental.Core.GUIHelpers;
-using System.IO;
+using Experimental.Core.Preset;
 using BepInEx;
 using Experimental.Stuff;
 using System.Collections;
@@ -81,6 +81,24 @@ public class FileManager : MonoBehaviour
         }
         GUISettingsData data = JsonUtility.FromJson<GUISettingsData>(json);
         GlobalStyles.SetColors(data.WindowColor, data.ButtonColor, data.SliderTrackColor, data.SliderThumbColor);
+    }
+
+    public static void LoadPreset() // Save & load everything like i said i was going to do
+    {
+        string Json = LoadFile("EPreset.json");
+        if (string.IsNullOrEmpty(Json))
+        {
+            SavePreset();
+            return;
+        }
+        PresetData dat = JsonUtility.FromJson<PresetData>(Json);
+        PresetHelpers.Apply(dat);
+    }
+
+    public static void SavePreset()
+    {
+        PresetData Data = PresetHelpers.Pull();
+        SaveFile("EPreset.json", JsonUtility.ToJson(Data, true));
     }
 
     public static string[] GetSoundFiles()

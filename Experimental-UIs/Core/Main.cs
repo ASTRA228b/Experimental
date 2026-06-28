@@ -55,6 +55,11 @@ public class Main : MonoBehaviour
         }
     }
 
+    private void Awake() // only load preset file
+    {
+        FileManager.LoadPreset();
+    }
+
     private void Update()
     {
         AParticleSystems.Handler();
@@ -177,6 +182,7 @@ public class Main : MonoBehaviour
 
     private void Settings()
     {
+        GUILayout.Label("Style");
         StyleChangerOpne = GUILayout.Toggle(StyleChangerOpne, "Style Settings");
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Save Style", GlobalStyles.Buttonss))
@@ -187,6 +193,19 @@ public class Main : MonoBehaviour
         if (GUILayout.Button("Load Style", GlobalStyles.Buttonss))
         {
             FileManager.LoadGUISettings();
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.Label("Mods");
+        GUILayout.Space(2f);
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save Everything", GlobalStyles.Buttonss))
+        {
+            FileManager.SavePreset();
+        }
+
+        if (GUILayout.Button("Load Everything", GlobalStyles.Buttonss))
+        {
+            FileManager.LoadPreset();
         }
         GUILayout.EndHorizontal();
     }

@@ -4,7 +4,7 @@ internal class Constantss
 {
     public const string GUID = "Astras.Mods.Experimental";
     public const string Name = "Experimental";
-    public const string Version = "0.0.8";
+    public const string Version = "0.0.9";
     public const string ObjectName = "Experimental.UIS";
     public const string INFORMATION = "Made by Astra";
 
