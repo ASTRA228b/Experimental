@@ -20,6 +20,7 @@ public class ModRegSystem : MonoBehaviour
         ModsManager.Register("EnderPearl", new EnderPearl());
         ModsManager.Register("IronMan", new IronMan());
         ModsManager.Register("NoClip", new NoClip());
+        ModsManager.Register("NoClipFly", new NoClipFly());
         ModsManager.Register("UpAndDown", new UpAndDown());
         ModsManager.Register("ZeroGrav", new ZeroGav());
         ModsManager.Register("LowGrav", new LowGrav());
