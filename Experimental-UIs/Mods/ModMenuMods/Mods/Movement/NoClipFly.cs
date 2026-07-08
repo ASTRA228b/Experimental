@@ -15,7 +15,7 @@ public class NoClipFly : ExpMod
 
     private static int FlySpeed => 25;
 
-    public NoClipFly() : base("No Clip Fly", Cat.Movement)
+    public NoClipFly() : base("NoClipFly", Cat.Movement)
     {
     }
 
