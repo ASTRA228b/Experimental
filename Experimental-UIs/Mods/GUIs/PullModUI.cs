@@ -36,10 +36,10 @@ public static class PullModUI
     {
         GUILayout.Label("Change PullSpeed:");
         pullPower = GUILayout.HorizontalSlider(pullPower, 0.001f, 0.2f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"Speed set to {pullPower:F3}");
+        GUILayout.Label($"Speed: {pullPower:F3}");
         GUILayout.Label("Change UphillPower:");
         UpHillPull = GUILayout.HorizontalSlider(UpHillPull, 0.001f, 0.1f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"Uphill set to {UpHillPull:F3}");
+        GUILayout.Label($"Uphill: {UpHillPull:F3}");
         GUILayout.Space(5f);
         GUILayout.Label("Change Input:");
         int OldIndex = InputSelectors.PSelectedIndex;

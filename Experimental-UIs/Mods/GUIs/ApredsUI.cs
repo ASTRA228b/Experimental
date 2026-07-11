@@ -52,16 +52,16 @@ public static class ApredsUI
         GUILayout.Space(5f);
         GUILayout.Label("Preds Strength");
         PredSrength = GUILayout.HorizontalSlider(PredSrength, 0.001f, 0.2f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"Strength set to {PredSrength:F3}");
+        GUILayout.Label($"Strength: {PredSrength:F3}");
         GUILayout.Label("Movement Threshold");
         movementThreshold = GUILayout.HorizontalSlider(movementThreshold, 0.01f, 0.3f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"Threshold set to {movementThreshold:F3}");
+        GUILayout.Label($"Threshold: {movementThreshold:F3}");
         GUILayout.Label("Smoothness");
         smoothness = GUILayout.HorizontalSlider(smoothness, 0.01f, 0.5f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"Smoothness set to {smoothness:F3}");
+        GUILayout.Label($"Smoothness: {smoothness:F3}");
         GUILayout.Label("Max Arm Length");
         maxArmLength = GUILayout.HorizontalSlider(maxArmLength, 1.0f, 2.5f, SliderStyle, SliderThumbStyle);
-        GUILayout.Label($"MAL set to {maxArmLength:F3}");
+        GUILayout.Label($"MAL: {maxArmLength:F3}");
         GUILayout.Space(5f);
         GUILayout.Label("Presets:");
         if (GUILayout.Button("Max", Buttonss))
