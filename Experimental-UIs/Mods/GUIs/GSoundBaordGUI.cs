@@ -100,7 +100,7 @@ public static class GSoundBaordGUI
     public static void Settings()
     {
         GUILayout.Label("Master Volume");
-        SoundManager.MasterVolume = GUILayout.HorizontalSlider( SoundManager.MasterVolume, 0f, 5f, SliderStyle, SliderThumbStyle);
+        SoundManager.MasterVolume = GUILayout.HorizontalSlider(SoundManager.MasterVolume, 0f, 5f, SliderStyle, SliderThumbStyle);
         GUILayout.Label($"Volume: {SoundManager.MasterVolume:F2}");
         GUILayout.Space(5f);
         GUILayout.Label("Local Volume");
@@ -125,5 +125,10 @@ public static class GSoundBaordGUI
             GSoundGUIManager.PlaybackMode = SoundManager.PlaybackMode.Both;
         }
         GUILayout.EndHorizontal();
+        if (GUILayout.Button(GSoundGUIManager.ShuffleEnabled ? "Shuffle : ON" : "Shuffle : OFF", Buttonss))
+        {
+            GSoundGUIManager.ShuffleEnabled = !GSoundGUIManager.ShuffleEnabled;
+        }
+        GSoundGUIManager.AutoPlayNext = GUILayout.Toggle(GSoundGUIManager.AutoPlayNext, "Auto Next");
     }
 }

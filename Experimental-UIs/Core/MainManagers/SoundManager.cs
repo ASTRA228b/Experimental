@@ -31,6 +31,11 @@ public static class SoundManager
 
     public static float CurrentLength => CurrentClip?.length ?? 0f;
 
+    public static event Action? ClipFinished;
+
+    private static bool WasPlaying;
+    private static bool ManualStop;
+
     public static void Pause()
     {
         if (LocalScr == null)
@@ -42,11 +47,12 @@ public static class SoundManager
 
     public static void Resume()
     {
-        if (LocalScr == null)
+        if (LocalScr == null || !IsPaused)
             return;
 
         LocalScr.UnPause();
         IsPaused = false;
+        WasPlaying = true;
     }
 
 
@@ -69,6 +75,20 @@ public static class SoundManager
             Pause();
     }
     #endregion
+
+    public static void Tick()
+    {
+        if (LocalScr == null)
+            return;
+        bool isPlayingNow = LocalScr.isPlaying;
+        if (WasPlaying &&!isPlayingNow && !IsPaused && !ManualStop && CurrentClip != null)
+        {
+            ClipFinished?.Invoke();
+        }
+        WasPlaying = isPlayingNow;
+        if (isPlayingNow)
+            ManualStop = false;
+    }
 
     public static void Init()
     {
@@ -144,6 +164,10 @@ public static class SoundManager
 
     public static void PlayLocal(AudioClip clip, float vol = 1f, bool loop = false)
     {
+        if (LocalScr == null)
+            return;
+        ManualStop = false;
+        WasPlaying = false;
         LocalScr!.volume = vol * LocalVolume * MasterVolume;
         LocalScr.clip = clip;
         LocalScr.loop = loop;
@@ -179,10 +203,14 @@ public static class SoundManager
         if (LocalScr == null)
             return;
 
+        ManualStop = true;
         LocalScr.Stop();
 
         IsPaused = false;
+        WasPlaying = false;
     }
+
+    
 
     public static void StopAll()
     {

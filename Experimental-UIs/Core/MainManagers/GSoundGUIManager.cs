@@ -12,7 +12,9 @@ public static class GSoundGUIManager
 
     public static int CurrentIndex;
     public static SoundManager.PlaybackMode PlaybackMode;
-
+    public static bool ShuffleEnabled;
+    public static bool AutoPlayNext = true;
+    private static int lastRandomIndex = -1;
     public class SoundCard
     {
         public string? Name;
@@ -50,23 +52,53 @@ public static class GSoundGUIManager
         if (I < 0 || I >= Tab.Cards.Count) return;
         CurrentIndex = I;
         CurrentCard = Tab.Cards[I];
-        await CurrentCard.PlayFile();
+        if (!string.IsNullOrEmpty(CurrentCard.FileName))
+        {
+            await CurrentCard.PlayFile();
+        }
+        else if (!string.IsNullOrEmpty(CurrentCard.FileURL))
+        {
+            await CurrentCard.PlayURL();
+        }
     }
 
     public static async Task Next()
     {
+        if (Tabs.Count == 0)
+            return;
         SoundTab tab = Tabs[SelectedTab];
-        int intded = CurrentIndex + 1;
-        if (intded >= tab.Cards.Count) intded = 0;
-        await PlayCard(tab, intded);
+        if (tab.Cards.Count == 0)
+            return;
+        int nextIndex;
+        if (ShuffleEnabled && tab.Cards.Count > 1)
+        {
+            do
+            {
+                nextIndex = UnityEngine.Random.Range(0, tab.Cards.Count);
+            }
+            while (nextIndex == CurrentIndex);
+            lastRandomIndex = nextIndex;
+        }
+        else
+        {
+            nextIndex = CurrentIndex + 1;
+            if (nextIndex >= tab.Cards.Count)
+                nextIndex = 0;
+        }
+        await PlayCard(tab, nextIndex);
     }
 
     public static async Task Previous()
     {
-        SoundTab T = Tabs[SelectedTab];
-        int prev = CurrentIndex - 1;
-        if (prev < 0) prev = T.Cards.Count - 1;
-        await PlayCard(T, prev);
+        if (Tabs.Count == 0)
+            return;
+        SoundTab tab = Tabs[SelectedTab];
+        if (tab.Cards.Count == 0)
+            return;
+        int previousIndex = CurrentIndex - 1;
+        if (previousIndex < 0)
+            previousIndex = tab.Cards.Count - 1;
+        await PlayCard(tab, previousIndex);
     }
 
     public static void Pause()

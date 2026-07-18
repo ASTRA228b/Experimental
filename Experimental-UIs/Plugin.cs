@@ -26,6 +26,7 @@ public class Plugin : BaseUnityPlugin
         Plugin.AddComponent<ControllerSystemManager>();
         Plugin.AddComponent<IntroPlayer>(); // fuck ts bro im lowk pissed ive spent 4 hours debugging ts its not worth it at all   
         Plugin.AddComponent<FileManager>();
+        Plugin.AddComponent<GSoundAutoPlayManager>();
         DontDestroyOnLoad(Plugin);
     }
 }
