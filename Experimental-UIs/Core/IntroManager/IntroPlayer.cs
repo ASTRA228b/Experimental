@@ -1,4 +1,5 @@
-﻿using Experimental.Stuff;
+﻿using Astras_Notification_Lib.Libraries;
+using Experimental.Stuff;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
@@ -39,6 +40,7 @@ public class IntroPlayer : MonoBehaviour
         ExperimentalIntroAudio?.Play();
         yield return new WaitForSeconds(IClip.length);
         Debug.Log($"[{Constantss.GUID}]: StartUp Stopped");
+        NotifiLib.MessageToast($"[{Constantss.GUID}]: Loaded");
         ExperimentalIntroAudio!.Stop();
     }
 
