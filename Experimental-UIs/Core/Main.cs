@@ -1,7 +1,7 @@
 ﻿using Experimental.Core.GUIHelpers;
 using Experimental.Core.MainManagers;
 using Experimental.Mods.GUIs;
-using Experimental.Mods.GUIs.total_chaos.All_apply;
+using Experimental.Core.Libraries.ChudOS;
 using Experimental.Mods.OtherUtils;
 using Experimental.Mods.Settings;
 using Photon.Pun;
@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
 
     private void OnGUI()
     {
+        NotifiLib.InitToast();
         if (!SLoaded)
         {
             GlobalStyles.INIT();

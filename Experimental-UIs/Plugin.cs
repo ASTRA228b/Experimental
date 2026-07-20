@@ -6,11 +6,9 @@ using Experimental.Mods.Controllers.ControllerManagers;
 using Experimental.Core.IntroManager;
 using Experimental.Core.MainManagers;
 using Experimental.Mods.Controllers;
-using Astras_Notification_Lib.Libraries;
 
 namespace Experimental.Plugin;
 
-[BepInDependency("Astras.Mods.ChudOS.Notifications", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInPlugin(Constantss.GUID, Constantss.Name, Constantss.Version)]
 public class Plugin : BaseUnityPlugin
 {
