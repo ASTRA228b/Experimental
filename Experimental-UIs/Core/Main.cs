@@ -77,7 +77,6 @@ public class Main : MonoBehaviour
     {
         // running RUNMODS Methods
         PullModUI.RunMods(); // PullMod
-        GorillaTimeUI.RunTMod(); // Gorilla TimeV2
         PSAModUI.RunPSAMod(); // PSA Mod
         VelMaxUI.RunVMod(); // VelMaxMod
         WallWalkUI.RunWalkerMod(); // WallWalk
