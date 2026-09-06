@@ -182,6 +182,9 @@ public class Main : MonoBehaviour
 
     private void Settings()
     {
+        GUILayout.Label("Startup");
+        GlobalVars.StartupSoundEnabled = GUILayout.Toggle(GlobalVars.StartupSoundEnabled, "Play Startup Sound");
+        GUILayout.Space(5f);
         GUILayout.Label("Style");
         StyleChangerOpne = GUILayout.Toggle(StyleChangerOpne, "Style Settings");
         GUILayout.BeginHorizontal();

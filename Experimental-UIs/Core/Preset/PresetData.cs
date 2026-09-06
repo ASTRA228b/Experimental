@@ -69,4 +69,7 @@ public class PresetData
     public bool PullModOpen;
     public bool VelMaxOpen;
     public bool WallWalkOpen;
+
+    // Startup settings
+    public bool StartupSoundEnabled = true;
 }

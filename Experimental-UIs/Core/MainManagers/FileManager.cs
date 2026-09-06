@@ -46,6 +46,8 @@ public class FileManager : MonoBehaviour
 
     public static void SaveFile(string FileName, string Data)
     {
+        Directory.CreateDirectory(RootFolder);
+
         File.WriteAllText(Path.Combine(RootFolder, FileName), Data);
     }
     public static string LoadFile(string FileName)
@@ -91,6 +93,10 @@ public class FileManager : MonoBehaviour
             SavePreset();
             return;
         }
+        PresetData data = new()
+        {
+            StartupSoundEnabled = true
+        };
         PresetData dat = JsonUtility.FromJson<PresetData>(Json);
         PresetHelpers.Apply(dat);
     }

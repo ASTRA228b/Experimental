@@ -4,6 +4,7 @@ using System.Collections;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Networking;
+using Experimental.Mods.Settings;
 
 namespace Experimental.Core.IntroManager;
 
@@ -13,6 +14,11 @@ public class IntroPlayer : MonoBehaviour
 
     private void Start()
     {
+        if (!GlobalVars.StartupSoundEnabled)
+        {
+            NotifiLib.MessageToast($"[{Constantss.GUID}]: Loaded");
+            return;
+        }
         ExperimentalIntroAudio = gameObject.AddComponent<AudioSource>();
         ExperimentalIntroAudio.playOnAwake = false;
         ExperimentalIntroAudio.loop = false;

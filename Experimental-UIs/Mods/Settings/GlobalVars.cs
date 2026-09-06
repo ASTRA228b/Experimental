@@ -5,6 +5,9 @@ namespace Experimental.Mods.Settings;
 
 public static class GlobalVars
 {
+    // Startup settings
+    public static bool StartupSoundEnabled = true;
+
     // PullMod (UI)
     public static Rect Window = new(155, 155, 360, 460);
     public static bool Open = false;

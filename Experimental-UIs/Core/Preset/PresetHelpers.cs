@@ -51,7 +51,9 @@ public static class PresetHelpers
             PSAModOpen = GlobalVars.PSAOpen,
             PullModOpen = GlobalVars.Open,
             VelMaxOpen = GlobalVars.VOpen,
-            WallWalkOpen = GlobalVars.WalkOpen
+            WallWalkOpen = GlobalVars.WalkOpen,
+
+            StartupSoundEnabled = GlobalVars.StartupSoundEnabled,
         };
     }
 
@@ -101,5 +103,7 @@ public static class PresetHelpers
         GlobalVars.Open = data.PullModOpen;
         GlobalVars.VOpen = data.VelMaxOpen;
         GlobalVars.WalkOpen = data.WallWalkOpen;
+
+        GlobalVars.StartupSoundEnabled = data.StartupSoundEnabled;
     }
 }
