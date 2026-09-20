@@ -8,28 +8,15 @@ public static class GlobalVars
     // Startup settings
     public static bool StartupSoundEnabled = true;
 
-    // PullMod (UI)
-    public static Rect Window = new(155, 155, 360, 460);
-    public static bool Open = false;
-    public static bool dropdownOpen = false;
-    // other ui stuff
-    public static string PName = "E - Astras PullMod V1";
-    public static int WindowID = 17865439;
-    // vars
-    public static float pullPower = 0f;
-    public static float UpHillPull = 0f;
-    public static bool lasttouchleft;
-    public static bool lasttouchright;
-    public static float SpeedValue = 8.5f;
-    public static float Normalmuilty = 1.5f;
-    public static bool Speed = false;
-    public enum HandPullMode
-    {
-        Left,
-        Right,
-        Both
-    }
-    public static HandPullMode CurrentMode = HandPullMode.Both;
+    // Astra's PullMod V2
+    public static Rect PMV2Window = new(155, 155, 400, 430);
+    public static bool PMV2Open;
+    public static int PMV2WindowID = 987421;
+
+    // Astra's PullMod Hub
+    public static Rect AMPHWindow = new(175, 155, 460, 470);
+    public static bool AMPHOpen;
+    public static int AMPHWindowID = 583291;
 
     // Psa Mod (UI)
     public static Rect Wrect = new(155, 155, 360, 460);

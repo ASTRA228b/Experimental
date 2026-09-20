@@ -6,10 +6,40 @@ namespace Experimental.Core.Preset;
 [Serializable]
 public class PresetData
 {
-    // APullMod
-    public float SpeedValue;
-    public float Normalmuilty;
-    public GlobalVars.HandPullMode CurrentMode;
+    // Astra's PullMod V2
+    public bool PMV2Enabled;
+    public float PMV2PullPower;
+    public float PMV2UpHillPower;
+    public float PMV2Momentum;
+    public float PMV2MaxPull;
+    public bool PMV2ClampVelocity;
+    public float PMV2MaxVelocity;
+    public int PMV2Mode;
+    public int PMV2Hand;
+    public int PMV2Activation;
+    public int PMV2Input;
+
+    public bool PMV2SpeedEnabled;
+    public bool PMV2SpeedOnlyWithPull;
+    public float PMV2Speed;
+    public float PMV2Multiplier;
+
+    // Astra's PullMod Hub
+    public bool AMPHEnabled;
+    public int AMPHMethod;
+    public float AMPHPullPower;
+    public float AMPHUpHillPower;
+    public float AMPHMomentum;
+    public float AMPHMaxPull;
+    public float AMPHMaxVelocity;
+    public float AMPHExtraPower;
+    public bool AMPHClampVelocity;
+
+    public int AMPHInput;
+    public int AMPHHand;
+    public int AMPHActivation;
+    public float AMPHReleaseWindow;
+    public float AMPHTouchLinger;
 
     // A PSA Mod
     public float Speedd;
@@ -66,7 +96,8 @@ public class PresetData
     public bool ATurnModOpen;
     public bool GTimeOpen;
     public bool PSAModOpen;
-    public bool PullModOpen;
+    public bool PMV2Open;
+    public bool AMPHOpen;
     public bool VelMaxOpen;
     public bool WallWalkOpen;
 

@@ -1,8 +1,10 @@
 ﻿using Experimental.Core.GUIHelpers;
+using Experimental.Core.Libraries.ChudOS;
 using Experimental.Core.MainManagers;
 using Experimental.Mods.GUIs;
-using Experimental.Core.Libraries.ChudOS;
 using Experimental.Mods.OtherUtils;
+using Experimental.Mods.PullMods.AMPH;
+using Experimental.Mods.PullMods.PMV2;
 using Experimental.Mods.Settings;
 using Photon.Pun;
 using UnityEngine;
@@ -38,7 +40,9 @@ public class Main : MonoBehaviour
             Window = GUILayout.Window(2223213, Window, UIM, "Experimental", GlobalStyles.WindowStyle);
         }
         // loading all the other uis
-        PullModUI.MakeUI();
+
+        PullModHubUI.MakeUI();
+        PullModV2UI.MakeUI();
         ApredsUI.MakePredsUI();
         GorillaTimeUI.MakeGTimeUI();
         PSAModUI.MakePSAModUI();
@@ -75,11 +79,13 @@ public class Main : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // running RUNMODS Methods
-        PullModUI.RunMods(); // PullMod
-        PSAModUI.RunPSAMod(); // PSA Mod
-        VelMaxUI.RunVMod(); // VelMaxMod
-        WallWalkUI.RunWalkerMod(); // WallWalk
+        PMV2System.Update();
+        PMV2SpeedSystem.Update();
+        AMPHSystem.Update();
+
+        PSAModUI.RunPSAMod();
+        VelMaxUI.RunVMod();
+        WallWalkUI.RunWalkerMod();
     }
 
 
@@ -122,9 +128,9 @@ public class Main : MonoBehaviour
     {
         GUILayout.Label("Guis");
         GUILayout.BeginHorizontal();
-        GlobalVars.Open = GUILayout.Toggle(GlobalVars.Open, "Astras PM V1");
+        GlobalVars.PMV2Open = GUILayout.Toggle(GlobalVars.PMV2Open, "Astra's PM V2");
+        GlobalVars.AMPHOpen = GUILayout.Toggle(GlobalVars.AMPHOpen, "AMPH");
         GlobalVars.IsOpen = GUILayout.Toggle(GlobalVars.IsOpen, "Apreds UI");
-        GlobalVars.GTVOpen = GUILayout.Toggle(GlobalVars.GTVOpen, "Gorilla TimeV2");
         GUILayout.EndHorizontal();
         GUILayout.Space(2f);
         GUILayout.BeginHorizontal();

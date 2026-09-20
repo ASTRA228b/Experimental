@@ -1,4 +1,7 @@
 ﻿using Experimental.Mods.Settings;
+using Experimental.Core.Other;
+using Experimental.Mods.PullMods.AMPH;
+using Experimental.Mods.PullMods.PMV2;
 
 namespace Experimental.Core.Preset;
 
@@ -8,9 +11,6 @@ public static class PresetHelpers
     {
         return new()
         {
-            SpeedValue = GlobalVars.SpeedValue,
-            Normalmuilty = GlobalVars.Normalmuilty,
-            CurrentMode = GlobalVars.CurrentMode,
             Speedd = GlobalVars.Speedd,
             MexGroundDis = GlobalVars.MexGroundDis,
             PredSrength = GlobalVars.PredSrength,
@@ -48,20 +48,83 @@ public static class PresetHelpers
             APredsOpen = GlobalVars.IsOpen,
             ATurnModOpen = GlobalVars.ATurnWindowOpen,
             GTimeOpen = GlobalVars.GTVOpen,
+            PMV2Open = GlobalVars.PMV2Open,
+            AMPHOpen = GlobalVars.AMPHOpen,
             PSAModOpen = GlobalVars.PSAOpen,
-            PullModOpen = GlobalVars.Open,
             VelMaxOpen = GlobalVars.VOpen,
             WallWalkOpen = GlobalVars.WalkOpen,
 
             StartupSoundEnabled = GlobalVars.StartupSoundEnabled,
+
+            PMV2Enabled = PMV2System.Enabled,
+            PMV2PullPower = PMV2System.PullPower,
+            PMV2UpHillPower = PMV2System.UpHillPower,
+            PMV2Momentum = PMV2System.Momentum,
+            PMV2MaxPull = PMV2System.MaxPull,
+            PMV2ClampVelocity = PMV2System.ClampVelocity,
+            PMV2MaxVelocity = PMV2System.MaxVelocity,
+            PMV2Mode = (int)PMV2System.Mode,
+            PMV2Hand = (int)PMV2System.Hand,
+            PMV2Activation = (int)PMV2System.Activation,
+            PMV2Input = InputSelectors.PMV2SelectedIndex,
+
+            PMV2SpeedEnabled = PMV2SpeedSystem.Enabled,
+            PMV2SpeedOnlyWithPull = PMV2SpeedSystem.OnlyWithPull,
+            PMV2Speed = PMV2SpeedSystem.Speed,
+            PMV2Multiplier = PMV2SpeedSystem.Multiplier,
+
+            AMPHEnabled = AMPHSystem.Enabled,
+            AMPHMethod = (int)AMPHMethods.Method,
+            AMPHPullPower = AMPHMethods.PullPower,
+            AMPHUpHillPower = AMPHMethods.UpHillPower,
+            AMPHMomentum = AMPHMethods.Momentum,
+            AMPHMaxPull = AMPHMethods.MaxPull,
+            AMPHMaxVelocity = AMPHMethods.MaxVelocity,
+            AMPHExtraPower = AMPHMethods.ExtraPower,
+            AMPHClampVelocity = AMPHMethods.ClampVelocity,
+
+            AMPHInput = AMPHInput.SelectedIndex,
+            AMPHHand = (int)AMPHSystem.Hand,
+            AMPHActivation = (int)AMPHSystem.Activation,
+            AMPHReleaseWindow = AMPHSystem.ReleaseWindow,
+            AMPHTouchLinger = AMPHSystem.TouchLinger,
         };
     }
 
     public static void Apply(PresetData data)
     {
-        GlobalVars.SpeedValue = data.SpeedValue;
-        GlobalVars.Normalmuilty = data.Normalmuilty;
-        GlobalVars.CurrentMode = data.CurrentMode;
+        PMV2System.Enabled = data.PMV2Enabled;
+        PMV2System.PullPower = data.PMV2PullPower;
+        PMV2System.UpHillPower = data.PMV2UpHillPower;
+        PMV2System.Momentum = data.PMV2Momentum;
+        PMV2System.MaxPull = data.PMV2MaxPull;
+        PMV2System.ClampVelocity = data.PMV2ClampVelocity;
+        PMV2System.MaxVelocity = data.PMV2MaxVelocity;
+        PMV2System.Mode = (PMV2System.PullMode)data.PMV2Mode;
+        PMV2System.Hand = (PMV2System.HandMode)data.PMV2Hand;
+        PMV2System.Activation = (PMV2System.ActivationMode)data.PMV2Activation;
+        InputSelectors.PMV2SelectedIndex = data.PMV2Input;
+
+        PMV2SpeedSystem.Enabled = data.PMV2SpeedEnabled;
+        PMV2SpeedSystem.OnlyWithPull = data.PMV2SpeedOnlyWithPull;
+        PMV2SpeedSystem.Speed = data.PMV2Speed;
+        PMV2SpeedSystem.Multiplier = data.PMV2Multiplier;
+
+        AMPHSystem.Enabled = data.AMPHEnabled;
+        AMPHMethods.Method = (AMPHMethods.PullMethod)data.AMPHMethod;
+        AMPHMethods.PullPower = data.AMPHPullPower;
+        AMPHMethods.UpHillPower = data.AMPHUpHillPower;
+        AMPHMethods.Momentum = data.AMPHMomentum;
+        AMPHMethods.MaxPull = data.AMPHMaxPull;
+        AMPHMethods.MaxVelocity = data.AMPHMaxVelocity;
+        AMPHMethods.ExtraPower = data.AMPHExtraPower;
+        AMPHMethods.ClampVelocity = data.AMPHClampVelocity;
+
+        AMPHInput.SelectedIndex = data.AMPHInput;
+        AMPHSystem.Hand = (AMPHSystem.HandMode)data.AMPHHand;
+        AMPHSystem.Activation = (AMPHSystem.ActivationMode)data.AMPHActivation;
+        AMPHSystem.ReleaseWindow = data.AMPHReleaseWindow;
+        AMPHSystem.TouchLinger = data.AMPHTouchLinger;
         GlobalVars.Speedd = data.Speedd;
         GlobalVars.MexGroundDis = data.MexGroundDis;
         GlobalVars.PredSrength = data.PredSrength;
@@ -100,10 +163,13 @@ public static class PresetHelpers
         GlobalVars.ATurnWindowOpen = data.ATurnModOpen;
         GlobalVars.GTVOpen = data.GTimeOpen;
         GlobalVars.PSAOpen = data.PSAModOpen;
-        GlobalVars.Open = data.PullModOpen;
+        GlobalVars.PMV2Open = data.PMV2Open;
+        GlobalVars.AMPHOpen = data.AMPHOpen;
         GlobalVars.VOpen = data.VelMaxOpen;
         GlobalVars.WalkOpen = data.WallWalkOpen;
 
         GlobalVars.StartupSoundEnabled = data.StartupSoundEnabled;
+        if (PMV2System.Enabled && AMPHSystem.Enabled)
+            AMPHSystem.Enabled = false;
     }
 }

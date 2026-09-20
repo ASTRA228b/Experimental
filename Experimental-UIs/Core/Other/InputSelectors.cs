@@ -5,36 +5,36 @@ namespace Experimental.Core.Other;
 
 public static class InputSelectors
 {
-    // PullMod
-    public static string[] PInputNames = {
-        "Right Grab",
-        "Left Grab",
-        "Right Trigger",
-        "Left Trigger",
-        "RightJoyStick (Hold)",
-        "LeftJoyStick (Hold)",
-        "A Button",
-        "B Button",
-        "X Button",
-        "Y Button"
-    };
+    public static string[] PMV2InputNames =
+ {
+    "Right Grab",
+    "Left Grab",
+    "Right Trigger",
+    "Left Trigger",
+    "RightJoyStick (Hold)",
+    "LeftJoyStick (Hold)",
+    "A Button",
+    "B Button",
+    "X Button",
+    "Y Button"
+};
 
-    public static Func<bool>[] PInputs =
+    public static Func<bool>[] PMV2Inputs =
     {
-        () => InputLib.RightGrab,
-        () => InputLib.LeftGrab,
-        () => InputLib.RightTrigger,
-        () => InputLib.LeftTrigger,
-        () => InputLib.RightJoystickClick,
-        () => InputLib.LeftJoystickClick,
-        () => InputLib.RightControllerAButton,
-        () => InputLib.RightControllerBButton,
-        () => InputLib.LeftControllerXButton,
-        () => InputLib.LeftControllerYButton
-    };
+    () => InputLib.RightGrab,
+    () => InputLib.LeftGrab,
+    () => InputLib.RightTrigger,
+    () => InputLib.LeftTrigger,
+    () => InputLib.RightJoystickClick,
+    () => InputLib.LeftJoystickClick,
+    () => InputLib.RightControllerAButton,
+    () => InputLib.RightControllerBButton,
+    () => InputLib.LeftControllerXButton,
+    () => InputLib.LeftControllerYButton
+};
 
-    public static int PSelectedIndex = 0;
-    public static bool PPressed => PInputs[PSelectedIndex]?.Invoke() ?? false;
+    public static int PMV2SelectedIndex;
+    public static bool PMV2Pressed => PMV2Inputs[PMV2SelectedIndex]?.Invoke() ?? false;
 
     // VelMax
     public static string[] VInputNames = {
