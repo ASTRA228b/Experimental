@@ -129,7 +129,7 @@ public class Main : MonoBehaviour
         GUILayout.Label("Guis");
         GUILayout.BeginHorizontal();
         GlobalVars.PMV2Open = GUILayout.Toggle(GlobalVars.PMV2Open, "Astra's PM V2");
-        GlobalVars.AMPHOpen = GUILayout.Toggle(GlobalVars.AMPHOpen, "AMPH");
+        GlobalVars.AMPHOpen = GUILayout.Toggle(GlobalVars.AMPHOpen, "APMH");
         GlobalVars.IsOpen = GUILayout.Toggle(GlobalVars.IsOpen, "Apreds UI");
         GUILayout.EndHorizontal();
         GUILayout.Space(2f);
