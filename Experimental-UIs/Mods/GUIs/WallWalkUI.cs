@@ -95,7 +95,7 @@ public static class WallWalkUI
           InputSelectors.UseWalkIndex,
           GUILayout.Width(200)
         );
-        dropdownOpen = oldIndex != InputSelectors.UseWalkIndex;
+       
         GUILayout.Label($"Current input: {InputSelectors.UseWalkInputNames[InputSelectors.UseWalkIndex]}");
     }
 

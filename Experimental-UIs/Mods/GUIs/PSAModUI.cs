@@ -57,7 +57,7 @@ public static class PSAModUI
             InputSelectors.SelectedIndex,
             GUILayout.Width(200)
         );
-        dropdownOpen = oldIndex != InputSelectors.SelectedIndex;
+        
         GUILayout.Space(5f);
         GUILayout.Label("Presets:");
 

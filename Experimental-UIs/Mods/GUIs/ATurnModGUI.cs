@@ -84,8 +84,7 @@ public static class ATurnModGUI
            InputSelectors.ATRSelectedIndex,
            GUILayout.Width(200)
         );
-        dropdownOpen = OldIndex != InputSelectors.ATLSelectedIndex;
-        dropdownOpen = newIndex != InputSelectors.ATRSelectedIndex;
+       
         GUILayout.Label($"Current inputs: L:{InputSelectors.ATLInputNames[InputSelectors.ATLSelectedIndex]} R:{InputSelectors.ATRInputNames[InputSelectors.ATRSelectedIndex]}");
     }
 }

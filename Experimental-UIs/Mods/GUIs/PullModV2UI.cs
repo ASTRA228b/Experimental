@@ -179,7 +179,12 @@ public static class PullModV2UI
     {
         GUILayout.Label("Input");
 
-        InputSelectors.PMV2SelectedIndex = GUILayout.SelectionGrid(InputSelectors.PMV2SelectedIndex, InputSelectors.PMV2InputNames, 2, Buttonss);
+        InputSelectors.PMV2SelectedIndex = MenuHelper.Dropdown(
+           "EPMV2_Input",
+           InputSelectors.PMV2InputNames,
+           InputSelectors.PMV2SelectedIndex,
+           GUILayout.Width(200)
+        );
 
         GUILayout.Space(5f);
         GUILayout.Label($"Current Input: {InputSelectors.PMV2InputNames[InputSelectors.PMV2SelectedIndex]}");

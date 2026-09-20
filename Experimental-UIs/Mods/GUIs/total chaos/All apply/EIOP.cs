@@ -11,9 +11,7 @@ public static class EIOP
        // if (Make)
         //{
             // pm
-            pullPower = 0.2f;
-            UpHillPull = 0.1f;
-            Speed = true;
+          
             // psa
             Speedd = 12f;
             MexGroundDis = 2f;
